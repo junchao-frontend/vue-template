@@ -4,13 +4,13 @@
       <br>
       <br>
   <el-form-item label="账号">
-    <el-input v-model="login.name"></el-input>
+    <el-input v-model="form.name"></el-input>
   </el-form-item>
    <el-form-item label="密码">
-    <el-input v-model="login.password"></el-input>
+    <el-input v-model="form.password"></el-input>
   </el-form-item>
   <el-form-item>
-    <el-button type="primary" @click="onSubmit">登录</el-button>
+    <el-button type="primary" @click="onSubmit(form)">登录</el-button>
     <el-button>注册</el-button>
   </el-form-item>
 </el-form>
@@ -18,25 +18,35 @@
 </template>
 
 <script>
+import { login } from '@/api/user'
 export default {
 
   data () {
     return {
-      login: {
-        name: '',
-        password: ''
-      }
+      form: {
+        name: 'admin',
+        password: '123456'
+      },
+      ceshidata: 'admin-token'
     }
   },
-
   components: {},
   computed: {},
   created () {},
   mounted () {},
   destroyed () {},
   methods: {
-    onSubmit () {
-      this.$router.push('/home')
+    onSubmit (form) {
+      login(form).then(res => {
+        console.log(res)
+        const token = res.data.token
+        // console.log('-----', token)
+        sessionStorage.setItem('tt', token)
+        this.$store.commit('SET_TOKEN', token)
+        // var aaa = sessionStorage.getItem('tt', token)
+        // console.log('aaa', aaa)
+        this.$router.push('/')
+      })
     }
   }
 }

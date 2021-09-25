@@ -5,15 +5,29 @@ Vue.use(Vuex)
 
 export default new Vuex.Store({
   state: {
-    count: '1'
+    token: '',
+    name: '',
+    role: []
   },
   mutations: {
-    upcount (state) {
-      state.count++
+    SET_TOKEN (state, token) {
+      state.token = token
     },
-    downcount (state) {
-      state.count--
+    SET_NAME (state, name) {
+      state.name = name
+    },
+    SET_ROLE (state, role) {
+      state.role = role
+    },
+    SET_PHOTO (state, photo) {
+      state.photo = photo
     }
+  },
+  getters: {
+    GET_TOKEN: state => state.token,
+    GET_ROLE: state => state.role,
+    GET_NAME: state => state.name,
+    GET_PHOTO: state => state.photo
   },
   actions: {
   },

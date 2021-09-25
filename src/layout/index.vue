@@ -10,13 +10,16 @@
           <span style="margin-left: 10px">wjc-vue-template</span>
         </div>
         <el-dropdown>
+          <div class="avatar-warp">
+          <img class="portrait" :src="GET_PHOTO">
           <span class="el-dropdown-link">
-            下拉菜单
+           {{GET_NAME}}
+           </span>
           <i class="el-icon-arrow-down el-icon--right"></i>
-          </span>
+          </div>
           <el-dropdown-menu slot="dropdown">
             <el-dropdown-item>个人中心</el-dropdown-item>
-            <el-dropdown-item>用户推出</el-dropdown-item>
+            <el-dropdown-item>用户退出</el-dropdown-item>
           </el-dropdown-menu>
         </el-dropdown>
       </el-header>
@@ -29,6 +32,7 @@
 
 <script>
 import SideBar from '../layout/components/SideBar'
+import { mapGetters } from 'vuex'
 export default {
   name: 'LayoutIndex',
   data () {
@@ -39,7 +43,9 @@ export default {
   components: {
     SideBar: SideBar
   },
-  computed: {},
+  computed: {
+    ...mapGetters(['GET_NAME', 'GET_PHOTO'])
+  },
   created () { },
   mounted () { },
   destroyed () { },
@@ -69,5 +75,15 @@ export default {
   line-height: 60px;
   display: flex;
   justify-content: space-between;
+}
+.portrait{
+  width: 40px;
+  height: 40px;
+  margin-right: 10px;
+  border-radius: 50%;
+}
+.avatar-warp{
+  display: flex;
+  align-items: center;
 }
 </style>
