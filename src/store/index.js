@@ -5,9 +5,10 @@ Vue.use(Vuex)
 
 export default new Vuex.Store({
   state: {
-    token: '',
+    token: sessionStorage.getItem('token'),
     name: '',
-    role: []
+    role: [],
+    photo: ''
   },
   mutations: {
     SET_TOKEN (state, token) {

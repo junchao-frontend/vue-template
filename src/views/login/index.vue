@@ -41,7 +41,7 @@ export default {
         console.log(res)
         const token = res.data.token
         // console.log('-----', token)
-        sessionStorage.setItem('tt', token)
+        sessionStorage.setItem('token', token) // 存入token
         this.$store.commit('SET_TOKEN', token)
         // var aaa = sessionStorage.getItem('tt', token)
         // console.log('aaa', aaa)

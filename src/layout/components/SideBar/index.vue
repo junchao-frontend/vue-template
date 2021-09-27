@@ -1,7 +1,38 @@
 <template>
-  <div>
-    侧边栏
-  </div>
+    <el-menu
+      default-active="2"
+      class="el-menu-vertical-demo"
+      @open="handleOpen"
+      @close="handleClose"
+      background-color="#0E1629"
+      text-color="#fff"
+      active-text-color="#ffd04b">
+      <div v-for="item in allRouters" :key="item.index">
+        <!-- 渲染没有一级菜单 而且没有设置hidden属性 -->
+        <el-menu-item v-if="item.children === undefined && !item.hidden" :index="item.path">
+        <i :class="item.meta.icon" />
+        <span style="padding-left: 15px">{{ item.meta.title }}</span>
+        </el-menu-item>
+        <!-- 渲染只有一个一级菜单的路由 -->
+      <el-menu-item v-if="item.children && item.children.length === 1" :index="item.children.path">
+        <i :class="item.meta.icon"></i>
+        <span >{{item.meta.title}}</span>
+      </el-menu-item>
+      <!--  渲染有多个菜单的路由 -->
+      <!-- <el-submenu >
+        <template slot="title">
+          <i :class="item.meta.icon"></i>
+          <span>{{item.meta.title}}</span>
+        </template>
+          <el-menu-item  v-for="children in childArr" :key="children.name">
+        <template slot="title">
+          <i :class="item.meta.icon"></i>
+          <span>{{children.meta.title}}</span>
+        </template>
+          </el-menu-item>
+      </el-submenu> -->
+      </div>
+    </el-menu>
 </template>
 
 <script>
@@ -9,14 +40,52 @@ export default {
 
   data () {
     return {
+      allRouters: []
     }
   },
-
   components: {},
   computed: {},
-  created () {},
+  created () {
+    this.showdata()
+  },
   mounted () {},
   destroyed () {},
-  methods: {}
+  methods: {
+    showdata () {
+      // 定义一个空数组allRouters 获取全部路由
+      const allRouters = this.$router.options.routes
+      this.allRouters = allRouters
+      // if (allRouters[0].hidden) {
+      //   console.log(allRouters[0].hidden)
+      // }
+      const childArr = [] // 定义储存子路由的数组
+      // 遍历所有路由，通过有没有hidden 渲染展示的侧边栏
+      allRouters.forEach((item) => {
+        if (this.routerFilter(item) && item.children) {
+          console.log(item, 'item')
+        }
+      })
+      this.childArr = childArr
+      // console.log(childArr, 'childArr')
+      // console.log(sideBar, '---------')
+      console.log(allRouters, 'allRouters')
+    },
+    routerFilter (item) {
+      // 这个函数用来筛选一下路由 筛选出没有设置hidden的路由
+      return !(item.hidden)
+    },
+    handleOpen (key, keyPath) {
+      // console.log(key, keyPath)
+    },
+    handleClose (key, keyPath) {
+      // console.log(key, keyPath)
+    }
+  }
 }
 </script>
+<style scoped>
+.container{
+  width: 100%;
+  height: 100%;
+}
+</style>
