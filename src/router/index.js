@@ -138,12 +138,17 @@ router.beforeEach((to, from, next) => {
   // to 是 访问界面
   // from 是来自哪
   // next是放行方法
-  if (to.path !== '/login') {
+  // 如果去登录界面 直接放行
+  if (to.path === '/login') {
+    next()
+  } else {
+    // 如果不是去登录界面 判断有没有token
     const logintoken = sessionStorage.getItem('token')
-    if (logintoken) {
-      // 已登录，允许通过
+    if (!logintoken) { // 如果没有token 则要去登录界面
+      next('/login')
+    } else {
+      // 有token 获取当前角色的信息
       next()
-      // 调用获取角色的接口
       findUserByToken(logintoken).then(res => {
         const userInfo = res.data
         // 把角色的数据存入vuex
@@ -151,15 +156,10 @@ router.beforeEach((to, from, next) => {
         store.commit('SET_NAME', userInfo.name)
         store.commit('SET_PHOTO', userInfo.photo)
       })
-    } else {
-      // 没有登录 跳转到登录界面
-      next('/login')
     }
-  } else {
-    // 登录界面 正常允许通过
-    next()
   }
 })
+
 // 解决Loading chunk (\d)+ failed问题
 router.onError((error) => {
   console.error(error)

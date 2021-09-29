@@ -1,6 +1,9 @@
 <template>
   <div class="container">
-    首页
+    <el-button v-permission = "{role:['admin']}">管理员能看见</el-button>
+    <el-button v-permission = "{role:['student']}">学生能看见</el-button>
+    <el-button v-permission = "{role:['admin', 'student']}">都能看见</el-button>
+    <!-- <el-button v-permission = "{role:['admin','student'],effect:'disabled'}">禁用按钮</el-button> -->
   </div>
 </template>
 
