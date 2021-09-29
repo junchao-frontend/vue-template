@@ -3,6 +3,10 @@ import VueRouter from 'vue-router'
 import Layout from '@/layout/index'
 import { findUserByToken } from '../api/user'
 import store from '../store'
+import Test1 from '@/views//dataCenter/echart'
+import Test2 from '@/views//dataCenter/form'
+import Test3 from '@/views//dataCenter/table'
+import Test4 from '@/views//dataCenter/ceshi'
 Vue.use(VueRouter)
 
 const routes = [
@@ -18,11 +22,11 @@ const routes = [
     component: Layout,
     meta: {
       icon: 'el-icon-s-home',
-      title: '首页'
+      title: '首  页'
     },
     children: [
       {
-        path: '',
+        path: '/',
         name: 'home',
         component: () => import('../views/home')
       }
@@ -32,6 +36,7 @@ const routes = [
     path: '/dataCenter',
     name: 'dataCenter',
     component: Layout,
+    redirect: '/dataCenter/form',
     meta: {
       icon: 'el-icon-s-data',
       title: '数据中心'
@@ -40,7 +45,7 @@ const routes = [
       {
         path: '/dataCenter/echart',
         name: 'echart',
-        component: () => import('../views/dataCenter/echart'),
+        component: Test1,
         meta: {
           title: '可视化组件'
         }
@@ -48,7 +53,7 @@ const routes = [
       {
         path: '/dataCenter/form',
         name: 'form',
-        component: () => import('../views/dataCenter/form'),
+        component: Test2,
         meta: {
           title: '表格组件'
         }
@@ -56,9 +61,17 @@ const routes = [
       {
         path: '/dataCenter/table',
         name: 'table',
-        component: () => import('../views/dataCenter/table'),
+        component: Test3,
         meta: {
           title: '表单组件'
+        }
+      },
+      {
+        path: '/dataCenter/ceshi',
+        name: 'ceshi',
+        component: Test4,
+        meta: {
+          title: '测试组件'
         }
       }
     ]
@@ -69,7 +82,7 @@ const routes = [
     component: Layout,
     redirect: '/power',
     meta: {
-      icon: 'el-icon-s-custom',
+      icon: 'el-icon-s-tools',
       title: '权限页面'
     },
     children: [
@@ -85,12 +98,23 @@ const routes = [
   },
   {
     path: '/people',
-    name: 'people',
-    component: () => import('../views/people'),
+    name: 'People',
+    component: Layout,
+    redirect: '/people',
     meta: {
       icon: 'el-icon-s-custom',
       title: '个人中心'
-    }
+    },
+    children: [
+      {
+        path: '/people',
+        name: 'people',
+        component: () => import('@/views/people'),
+        meta: {
+          title: '个人中心'
+        }
+      }
+    ]
   },
   {
     path: '/404',
@@ -134,6 +158,18 @@ router.beforeEach((to, from, next) => {
   } else {
     // 登录界面 正常允许通过
     next()
+  }
+})
+// 解决Loading chunk (\d)+ failed问题
+router.onError((error) => {
+  console.error(error)
+  const pattern = /Loading chunk/g
+  // const pattern = /Loading chunk (\d)+ failed/g
+  const isChunkLoadFailed = error.message.match(pattern)
+  const targetPath = router.history.pending.fullPath
+  if (isChunkLoadFailed && error.type === 'missing') {
+    // const targetPath = router.history.pending.fullPath
+    router.push(targetPath)
   }
 })
 export default router

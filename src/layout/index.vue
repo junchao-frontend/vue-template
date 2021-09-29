@@ -18,7 +18,7 @@
           <i class="el-icon-arrow-down el-icon--right"></i>
           </div>
           <el-dropdown-menu slot="dropdown">
-            <el-dropdown-item>个人中心</el-dropdown-item>
+            <el-dropdown-item @click.native="toPeople">个人中心</el-dropdown-item>
             <el-dropdown-item @click.native="quit">用户退出</el-dropdown-item>
           </el-dropdown-menu>
         </el-dropdown>
@@ -54,6 +54,9 @@ export default {
       this.$router.push('/login')
       sessionStorage.clear() // 清空sessionstorage里面的所有数据
       window.location.reload() // 刷新vuex
+    },
+    toPeople () {
+      this.$router.push('/people')
     }
   }
 }
@@ -69,8 +72,6 @@ export default {
 .aside {
   background-color: #0E1629;
   color: #333;
-  text-align: center;
-  line-height: 200px;
 }
 .el-main {
   background-color: #e9eef3;
