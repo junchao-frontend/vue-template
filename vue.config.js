@@ -4,8 +4,7 @@
 module.exports = {
   devServer: {
     port: 5000,
-    open: true,
-    hot: true
+    open: true
   },
   publicPath: './', // 静态资源路径默认 '/' 打包后会白屏
   outputDir: 'dist', // 打包后文件的目录 默认为dist

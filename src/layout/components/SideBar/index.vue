@@ -1,6 +1,6 @@
 <template>
   <el-menu
-    default-active="$route.path"
+    :default-active="$route.path"
     class="menu"
     router
     background-color="#0E1629"
@@ -24,7 +24,7 @@
         :index="item.path"
       >
         <i :class="item.meta.icon"></i>
-        <span style="padding-left: 15px">{{ item.meta.title }}</span>
+        <span style="padding-left: 15px">{{ item.children[0].meta.title }}</span>
       </el-menu-item>
       <!--  渲染有多个菜单的路由 -->
       <el-submenu
@@ -59,7 +59,7 @@ export default {
   components: {},
   computed: {},
   created () {
-    // console.log(this.$route.path)
+    console.log(this.$route.path)
     this.showdata()
     // this.ceshi()
   },
@@ -68,26 +68,6 @@ export default {
   },
   destroyed () { },
   methods: {
-    // initRouter () {
-    //   const allRoutes = this.$router.options.routes
-    //   this.allRouters = allRoutes
-    //   allRoutes.forEach(item => { // 遍历全部路由
-    //     // const child = [] // 定义空数组 存储子路由
-    //     // console.log(item.children)
-    //     if (item.children) {
-    //       item.children.forEach(i => {
-    //         // console.log(i)
-    //         if (i.meta) {
-    //           console.log(i)
-    //           this.childArr.push(i)
-    //         }
-    //       })
-    //     }
-    //     // if (item.children.length === 3) {
-    //     //   console.log(item)
-    //     // }
-    //   })
-    // },
     showdata () {
       // 定义一个空数组allRouters 获取全部路由
       const allRouters = this.$router.options.routes
@@ -114,20 +94,12 @@ export default {
       this.childArr = childArr
       // console.log(this.childArr, 'childArr')
       // console.log(sideBar, '---------')
-      // console.log(allRouters, 'allRouters')
+      console.log(allRouters, 'allRouters')
     },
     routerFilter (item) {
       // 这个函数用来筛选一下路由 筛选出没有设置hidden的路由
       return !(item.hidden)
     }
-    // ceshi () {
-    //   this.childArr.forEach(item => {
-    //     console.log(item)
-    //     // item.forEach(i => {
-    //     //   console.log(i)
-    //     // })
-    //   })
-    // }
   }
 }
 </script>

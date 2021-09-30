@@ -7,9 +7,20 @@ import Test1 from '@/views//dataCenter/echart'
 import Test2 from '@/views//dataCenter/form'
 import Test3 from '@/views//dataCenter/table'
 import Test4 from '@/views//dataCenter/ceshi'
+import Test5 from '@/views/home'
 Vue.use(VueRouter)
-
+// vue-router路由版本更新产生的问题,导致路由跳转失败抛出该错误，但并不影响程序功能
+const originalPush = VueRouter.prototype.push
+VueRouter.prototype.push = function push (location, onResolve, onReject) {
+  if (onResolve || onReject) return originalPush.call(this, location, onResolve, onReject)
+  return originalPush.call(this, location).catch(err => err)
+}
 const routes = [
+  {
+    path: '/',
+    redirect: '/login',
+    hidden: true
+  },
   {
     path: '/login',
     name: 'login',
@@ -17,18 +28,22 @@ const routes = [
     hidden: true
   },
   {
-    path: '/',
+    path: '/home',
     name: 'Home',
+    redirect: '/home',
     component: Layout,
     meta: {
       icon: 'el-icon-s-home',
-      title: '首  页'
+      title: '首页'
     },
     children: [
       {
-        path: '/',
+        path: '/home',
         name: 'home',
-        component: () => import('../views/home')
+        component: Test5,
+        meta: {
+          title: '首页'
+        }
       }
     ]
   },
@@ -91,7 +106,8 @@ const routes = [
         name: 'power',
         component: () => import('@/views/power'),
         meta: {
-          title: '权限页面'
+          title: '权限页面',
+          role: 'admin'
         }
       }
     ]
@@ -129,7 +145,7 @@ const routes = [
 ]
 
 const router = new VueRouter({
-  mode: 'history',
+  // mode: 'history',
   base: process.env.BASE_URL,
   routes
 })
@@ -145,13 +161,14 @@ router.beforeEach((to, from, next) => {
     // 如果不是去登录界面 判断有没有token
     const logintoken = sessionStorage.getItem('token')
     if (!logintoken) { // 如果没有token 则要去登录界面
-      next('/login')
+      next('/') // 如果这里路径写 /login  则不需要上面根路径的重定向
     } else {
       // 有token 获取当前角色的信息
       next()
       findUserByToken(logintoken).then(res => {
         const userInfo = res.data
         // 把角色的数据存入vuex
+        // console.log('123')
         store.commit('SET_ROLE', userInfo.role)
         store.commit('SET_NAME', userInfo.name)
         store.commit('SET_PHOTO', userInfo.photo)

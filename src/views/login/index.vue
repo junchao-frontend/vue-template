@@ -17,7 +17,7 @@
 </template>
 
 <script>
-import { login } from '@/api/user'
+import { login, findUserByToken } from '@/api/user'
 export default {
 
   data () {
@@ -36,15 +36,23 @@ export default {
   destroyed () {},
   methods: {
     onSubmit (form) {
-      login(form).then(res => {
-        console.log(res)
+      login(form).then(async res => {
+        // console.log(res)
         const token = res.data.token
-        // console.log('-----', token)
+        // 通过token调取获取角色数据的接口  之后把数据存入缓存
+        await findUserByToken(token).then(res2 => {
+          const userInfo = res2.data
+          sessionStorage.setItem('role', userInfo.role)
+          console.log('sss')
+          // console.log(res2, 'res2')
+        })
+        console.log('bbb')
         sessionStorage.setItem('token', token) // 存入token
         this.$store.commit('SET_TOKEN', token)
         // var aaa = sessionStorage.getItem('tt', token)
-        // console.log('aaa', aaa)
-        this.$router.push('/')
+        this.$router.push({
+          path: '/home'
+        })
       })
     }
   }

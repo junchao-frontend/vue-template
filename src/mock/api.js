@@ -9,6 +9,7 @@ const Mock = require('mockjs')
 //   }
 // }
 Mock.mock('/login', 'post', (req) => {
+  // console.log(req, 'req')
   const username = JSON.parse(req.body)
   if (username.name === 'admin') {
     return tokens.admin

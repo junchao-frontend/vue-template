@@ -3,7 +3,7 @@
     <el-button v-permission = "{role:['admin']}">管理员能看见</el-button>
     <el-button v-permission = "{role:['student']}">学生能看见</el-button>
     <el-button v-permission = "{role:['admin', 'student']}">都能看见</el-button>
-    <!-- <el-button v-permission = "{role:['admin','student'],effect:'disabled'}">禁用按钮</el-button> -->
+    <el-button v-disabled = "{effect:'disabled'}">禁用按钮</el-button>
   </div>
 </template>
 
@@ -14,11 +14,11 @@ export default {
     return {
     }
   },
-
   components: {},
   computed: {},
   created () {},
-  mounted () {},
+  mounted () {
+  },
   destroyed () {},
   methods: {}
 }
