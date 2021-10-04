@@ -98,7 +98,8 @@ const routes = [
     redirect: '/power',
     meta: {
       icon: 'el-icon-s-tools',
-      title: '权限页面'
+      title: '权限页面',
+      role: 'admin'
     },
     children: [
       {
@@ -107,7 +108,7 @@ const routes = [
         component: () => import('@/views/power'),
         meta: {
           title: '权限页面',
-          role: 'admin'
+          role: ['admin']
         }
       }
     ]

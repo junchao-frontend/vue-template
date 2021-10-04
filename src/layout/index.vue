@@ -1,12 +1,16 @@
 <template>
   <el-container class="layout-container">
-    <el-aside class="aside" width="180px">
-      <SideBar></SideBar>
+    <el-aside class="aside" :width="isCollapse ? '64px' : '200px'">
+      <SideBar :is-collapse="isCollapse" />
     </el-aside>
     <el-container>
       <el-header class="header">
         <div>
-          <i class="el-icon-s-fold" style="cursor: pointer"> </i>
+          <i :class="{
+            'el-icon-s-fold' : !isCollapse ,
+            'el-icon-s-unfold' : isCollapse
+          }"
+          style="cursor: pointer" @click="isCollapse = !isCollapse"> </i>
           <span style="margin-left: 10px">wjc-vue-template</span>
         </div>
         <el-dropdown>
@@ -37,6 +41,7 @@ export default {
   name: 'LayoutIndex',
   data () {
     return {
+      isCollapse: false
     }
   },
 

@@ -6,18 +6,18 @@
     background-color="#0E1629"
     text-color="#fff"
     :collapse-transition="false"
-    :collapse="false"
+    :collapse="isCollapse"
     active-text-color="#ffd04b"
   >
-    <div v-for="item in allRouters" :key="item.index">
+    <div v-for="item in userRoutes" :key="item.index">
       <!-- 渲染没有一级菜单 而且没有设置hidden属性 -->
-      <el-menu-item
-        v-if="item.children === undefined && !item.hidden"
+      <!-- <el-menu-item
+        v-if="item.children === undefined"
         :index="item.path"
       >
         <i :class="item.meta.icon" />
         <span style="padding-left: 15px">{{ item.meta.title }}</span>
-      </el-menu-item>
+      </el-menu-item> -->
       <!-- 渲染只有一个一级菜单的路由 -->
       <el-menu-item
         v-if="item.children && item.children.length === 1"
@@ -37,10 +37,7 @@
         </template>
         <el-menu-item  v-for="children in childArr" :key="children.index" :index="children.path">
           <span style="padding-left: 15px">{{children.meta.title}}</span>
-          <!-- <template slot="title">
-            <span>{{children.meta.title}}</span>
-          </template> -->
-          </el-menu-item>
+        </el-menu-item>
       </el-submenu>
     </div>
   </el-menu>
@@ -51,15 +48,16 @@ export default {
 
   data () {
     return {
-      allRouters: [],
+      userRoutes: [],
       childArr: [],
-      num: '56456'
+      role: ''
     }
   },
+  props: ['is-collapse'],
   components: {},
   computed: {},
   created () {
-    console.log(this.$route.path)
+    // console.log(this.$route.path)
     this.showdata()
     // this.ceshi()
   },
@@ -69,32 +67,24 @@ export default {
   destroyed () { },
   methods: {
     showdata () {
-      // 定义一个空数组allRouters 获取全部路由
       const allRouters = this.$router.options.routes
-      this.allRouters = allRouters
-      // if (allRouters[0].hidden) {
-      //   console.log(allRouters[0].hidden)
-      // }
       const childArr = [] // 定义储存子路由的数组
-      // 遍历所有路由，通过有没有hidden 渲染展示的侧边栏
-      allRouters.forEach((item) => {
-        if (item.children && item.children.length > 1) {
+      const userRoutes = [] // 定义用户数组
+      this.role = sessionStorage.getItem('role')
+      allRouters.forEach(item => {
+        if (this.routerFilter(item) && item.children) { // 如果没有设置hidden属性 且有子路由
+          userRoutes.push(item)
+        }
+        if (this.routerFilter(item) && item.children.length > 1) {
           item.children.forEach(i => {
             childArr.push(i)
           })
         }
-        // if (this.routerFilter(item) && item.children && item.children.length > 1) {
-        //   item.children.forEach(item => {
-        //     childArr.push(item)
-        //   })
-        // }
-        // item.children = childArr
-        // console.log(item, 'item')
       })
+      this.userRoutes = userRoutes
       this.childArr = childArr
-      // console.log(this.childArr, 'childArr')
-      // console.log(sideBar, '---------')
-      console.log(allRouters, 'allRouters')
+      console.log(userRoutes, 'userRoutes')
+      console.log(childArr, 'childArr')
     },
     routerFilter (item) {
       // 这个函数用来筛选一下路由 筛选出没有设置hidden的路由

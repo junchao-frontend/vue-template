@@ -43,10 +43,10 @@ export default {
         await findUserByToken(token).then(res2 => {
           const userInfo = res2.data
           sessionStorage.setItem('role', userInfo.role)
-          console.log('sss')
+          // console.log('sss')
           // console.log(res2, 'res2')
         })
-        console.log('bbb')
+        // console.log('bbb')
         sessionStorage.setItem('token', token) // 存入token
         this.$store.commit('SET_TOKEN', token)
         // var aaa = sessionStorage.getItem('tt', token)
