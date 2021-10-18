@@ -10,23 +10,22 @@
     <el-input v-model="form.password"></el-input>
   </el-form-item>
   <el-form-item>
-    <el-button type="primary" @click="onSubmit(form)">登录</el-button>
+    <el-button type="primary" @click="onSubmit()">登录</el-button>
   </el-form-item>
 </el-form>
 </div>
 </template>
 
 <script>
-import { login, findUserByToken } from '@/api/user'
+import { login } from '@/api/user'
 export default {
 
   data () {
     return {
       form: {
         name: 'admin',
-        password: '123456'
-      },
-      ceshidata: 'admin-token'
+        password: 'admin'
+      }
     }
   },
   components: {},
@@ -35,24 +34,41 @@ export default {
   mounted () {},
   destroyed () {},
   methods: {
-    onSubmit (form) {
-      login(form).then(async res => {
-        // console.log(res)
-        const token = res.data.token
-        // 通过token调取获取角色数据的接口  之后把数据存入缓存
-        await findUserByToken(token).then(res2 => {
-          const userInfo = res2.data
-          sessionStorage.setItem('role', userInfo.role)
-          // console.log('sss')
-          // console.log(res2, 'res2')
-        })
-        // console.log('bbb')
-        sessionStorage.setItem('token', token) // 存入token
+    // onSubmit (form) {
+    //   login(form).then(async res => {
+    //     console.log(res)
+    //     const token = res.data.token
+    //     // 通过token调取获取角色数据的接口  之后把数据存入缓存
+    //     await findUserByToken(token).then(res2 => {
+    //       const userInfo = res2.data
+    //       sessionStorage.setItem('role', userInfo.role)
+    //       // console.log('sss')
+    //       // console.log(res2, 'res2')
+    //     })
+    //     // console.log('bbb')
+    //     sessionStorage.setItem('token', token) // 存入token
+    //     this.$store.commit('SET_TOKEN', token)
+    //     // var aaa = sessionStorage.getItem('tt', token)
+    //     this.$router.push({
+    //       path: '/home'
+    //     })
+    //   })
+    // }
+    onSubmit () {
+      login().then(res => {
+        const userInfo = res.data.data
+        const token = userInfo.token
+        const roles = userInfo.role
+        const name = userInfo.name
+        const photo = userInfo.photo
+        sessionStorage.setItem('token', token)
+        sessionStorage.setItem('roles', roles)
+        this.$store.commit('SET_NAME', name)
+        this.$store.commit('SET_ROLE', roles)
+        this.$store.commit('SET_PHOTO', photo)
         this.$store.commit('SET_TOKEN', token)
-        // var aaa = sessionStorage.getItem('tt', token)
-        this.$router.push({
-          path: '/home'
-        })
+        // console.log(userInfo)
+        this.$router.push('/home')
       })
     }
   }

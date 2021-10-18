@@ -1,7 +1,7 @@
 import axios from 'axios'
 
 const request = axios.create({
-  // baseURL: 'http://api-toutiao-web.itheima.net/'
+  // baseURL: 'http://192.168.8.113:5001/'
 })
 
 // get 一遍用于查询 post 一般用于添加 put一般用于修改，完整替换 delete patch修改 局部修改

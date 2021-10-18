@@ -9,12 +9,3 @@ export const login = data => {
     data
   })
 }
-
-// 获取用户信息
-export function findUserByToken (data) {
-  return request({
-    url: '/findUserByToken',
-    method: 'post',
-    data
-  })
-}

@@ -5,12 +5,16 @@ Vue.use(Vuex)
 
 export default new Vuex.Store({
   state: {
+    currentPage: '',
     token: sessionStorage.getItem('token'),
     name: '',
     role: [],
     photo: ''
   },
   mutations: {
+    insertCurrentPage (state, currentPage) {
+      state.currentPage = currentPage
+    },
     SET_TOKEN (state, token) {
       state.token = token
     },
@@ -28,7 +32,8 @@ export default new Vuex.Store({
     GET_TOKEN: state => state.token,
     GET_ROLE: state => state.role,
     GET_NAME: state => state.name,
-    GET_PHOTO: state => state.photo
+    GET_PHOTO: state => state.photo,
+    getCurrentPage: state => state.currentPage
   },
   actions: {
   },

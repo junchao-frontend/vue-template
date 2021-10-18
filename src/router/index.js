@@ -1,12 +1,12 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
 import Layout from '@/layout/index'
-import { findUserByToken } from '../api/user'
+import { login } from '../api/user'
 import store from '../store'
 import Test1 from '@/views//dataCenter/echart'
 import Test2 from '@/views//dataCenter/form'
 import Test3 from '@/views//dataCenter/table'
-import Test4 from '@/views//dataCenter/ceshi'
+import Test4 from '@/views//dataCenter/api'
 import Test5 from '@/views/home'
 Vue.use(VueRouter)
 // vue-router路由版本更新产生的问题,导致路由跳转失败抛出该错误，但并不影响程序功能
@@ -28,8 +28,8 @@ const routes = [
     hidden: true
   },
   {
-    path: '/home',
-    name: 'Home',
+    path: '/homeF',
+    name: 'homeF',
     redirect: '/home',
     component: Layout,
     meta: {
@@ -82,24 +82,23 @@ const routes = [
         }
       },
       {
-        path: '/dataCenter/ceshi',
-        name: 'ceshi',
+        path: '/dataCenter/api',
+        name: 'api',
         component: Test4,
         meta: {
-          title: '测试组件'
+          title: 'api组件'
         }
       }
     ]
   },
   {
-    path: '/power',
-    name: 'Power',
+    path: '/powerF',
+    name: 'powerF',
     component: Layout,
     redirect: '/power',
     meta: {
       icon: 'el-icon-s-tools',
-      title: '权限页面',
-      role: 'admin'
+      title: '权限页面'
     },
     children: [
       {
@@ -114,8 +113,8 @@ const routes = [
     ]
   },
   {
-    path: '/people',
-    name: 'People',
+    path: '/peopleF',
+    name: 'peopleF',
     component: Layout,
     redirect: '/people',
     meta: {
@@ -152,10 +151,12 @@ const router = new VueRouter({
 })
 // 路由守卫
 router.beforeEach((to, from, next) => {
+  // console.log(to, '----')
   // to 是 访问界面
   // from 是来自哪
   // next是放行方法
   // 如果去登录界面 直接放行
+  store.commit('insertCurrentPage', to.fullPath)
   if (to.path === '/login') {
     next()
   } else {
@@ -166,8 +167,8 @@ router.beforeEach((to, from, next) => {
     } else {
       // 有token 获取当前角色的信息
       next()
-      findUserByToken(logintoken).then(res => {
-        const userInfo = res.data
+      login(logintoken).then(res => {
+        const userInfo = res.data.data
         // 把角色的数据存入vuex
         // console.log('123')
         store.commit('SET_ROLE', userInfo.role)
