@@ -19,8 +19,9 @@
 
 <script>
 import { mapGetters } from 'vuex'
+import { sceneMixin } from '../../utils/testMixin'
 export default {
-
+  mixins: [sceneMixin],
   data () {
     return {
     }
@@ -30,13 +31,18 @@ export default {
     ...mapGetters(['GET_NAME', 'GET_ROLE', 'GET_PHOTO'])
   },
   created () {},
-  mounted () {},
+  mounted () {
+    // this.test1()
+  },
   destroyed () {},
   methods: {
     quit () {
       this.$router.push('/login')
       sessionStorage.clear() // 清空sessionstorage里面的所有数据
       window.location.reload() // 刷新vuex
+    },
+    test1 () {
+      // console.log('组件里面的test1')
     }
   }
 }

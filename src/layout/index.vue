@@ -36,8 +36,10 @@
 
 <script>
 import SideBar from '../layout/components/SideBar'
+// import { sceneMixin } from '../utils/testMixin'
 import { mapGetters } from 'vuex'
 export default {
+  // mixins: [sceneMixin],
   name: 'LayoutIndex',
   data () {
     return {

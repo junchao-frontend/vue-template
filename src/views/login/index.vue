@@ -1,18 +1,42 @@
 <template>
   <div class="login-container">
-    <el-form ref="form" :model="form" label-width="80px" class="loginform">
-      <br>
-      <br>
-  <el-form-item label="账号">
-    <el-input v-model="form.name"></el-input>
-  </el-form-item>
-   <el-form-item label="密码">
-    <el-input v-model="form.password"></el-input>
-  </el-form-item>
-  <el-form-item>
-    <el-button type="primary" @click="onSubmit()">登录</el-button>
-  </el-form-item>
-</el-form>
+    <div class="login-box">
+      <div class="box-left">
+        <div class="left-text">
+          <div>
+            <img src="../../assets/logo1.png" alt="">
+          </div>
+          <br>
+          <div class="ceshi">
+          <form class="form-container">
+            <label for="fname">User Name</label><br>
+            <el-input v-model="form.name"></el-input><br><br>
+            <label for="lname">Password</label><br>
+            <el-input v-model="form.password"></el-input><br>
+            <el-button type="danger" @click="onSubmit">Log In</el-button><br>
+            <div class="checkbox">
+            <el-checkbox v-model="checked">Remember Me</el-checkbox>
+            <span style="color:rgb(24, 109, 207)">Forgot Password?</span>
+            </div>
+            <hr style="marginTop:28px">
+            <span class="lasttest">Register New User</span>
+          </form>
+          </div>
+        </div>
+      </div>
+      <div class="box-right">
+        <div class="right-text">
+          <div class="textstyle">
+          <strong>Welcome to Wjc-template</strong>
+          <hr>
+          <br>
+          <span>
+            Lorem ipsum is simply dummy text of the printing andtypesetting industry. Lorem Ipsum has been the industry'sstandard dummy text ever since the 150s.
+          </span>
+          </div>
+        </div>
+      </div>
+    </div>
 </div>
 </template>
 
@@ -25,7 +49,8 @@ export default {
       form: {
         name: 'admin',
         password: 'admin'
-      }
+      },
+      checked: true
     }
   },
   components: {},
@@ -69,31 +94,124 @@ export default {
         this.$store.commit('SET_TOKEN', token)
         // console.log(userInfo)
         this.$router.push('/home')
+        // console.log('.then')
       })
+      // console.log('外部函数')
     }
+    // async onSubmit () {
+    //   const res = await login()
+    //   console.log(res)
+    // }
   }
 }
 </script>
 <style scoped>
 .login-container{
-  position: absolute;
-  top:0;
-  left:0;
-  right: 0;
-  bottom: 0;
+  position: relative;
+  width: 100vw;
+  height: 100vh;
+  background-color: rgb(245, 246, 250);
   display: flex;
   align-items: center;
-  justify-content: center;
-  background-image: url('https://gimg2.baidu.com/image_search/src=http%3A%2F%2Fimg.jj20.com%2Fup%2Fallimg%2F1114%2F0H120154Q6%2F200H1154Q6-4-1200.jpg&refer=http%3A%2F%2Fimg.jj20.com&app=2002&size=f9999,10000&q=a80&n=0&g=0n&fmt=jpeg?sec=1634994326&t=705f2f71ddebe699176644f36e6e4378');
-  background-repeat: no-repeat;
-  background-size: 100% 100%;
 }
-.loginform{
-  width: 400px;
-  height: 250px;
-  border: 1px solid red;
-  background-color: rgb(255, 255, 255);
-  opacity: 0.8;
-  box-shadow: 5px 5px 10px rgb(156, 154, 154);
+.login-container::before{
+        content: "";  /*:before和:after必带技能，重要性为满5颗星*/
+        display: block;
+        position: absolute;  /*日常绝对定位*/
+        top: 0;
+        bottom: 0;
+        left: 50%;
+        right: 0;
+        background: rgb(28, 59, 105);
+}
+.login-box{
+        box-shadow: 0px 3px 10px 3px rgba(0, 0, 0, 0.45);
+        /* -webkit-box-shadow: 0 12px 5px -10px rgba(0,0,0,0.1), 0 0 4px 0 rgba(0,0,0,0.1); */
+        z-index: 10;
+        /* justify-content: center; */
+        width: 1250px;
+        height: 650px;
+        margin: 0 auto;
+        background-color: rgb(245, 194, 128);
+        display: flex;
+}
+.box-left{
+        flex: 1;
+        height: 100%;
+        background-color:rgb(245, 246, 250) ;
+}
+.box-right{
+        flex: 1;
+        height: 100%;
+        background-color:rgb(28, 59, 105) ;
+        background: url('../../assets/box.jpg') no-repeat 0% 20%/ cover;
+        /* background-repeat: no-repeat;
+        background-size:cover; */
+        background-position: 40% 0;
+}
+.right-text{
+  display: flex;
+  align-items: center;
+  height: 100%;
+  color:white;
+  font-size: 20px;
+  background-color: rgba(40, 70, 110,0.7);
+}
+.textstyle{
+  margin-left: 20px;
+  padding: 12px;
+}
+.left-text{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+}
+.form-container{
+  font-size: 15px;
+  color: rgb(103, 103, 104);
+  padding: 22px;
+  width: 300px;
+  height: 320px;
+  background-color: rgba(255, 255, 255);
+}
+>>>.el-input__inner {
+    margin-top: 6px;
+    -webkit-appearance: none;
+    background-color: #FFF;
+    background-image: none;
+    border-radius: 4px;
+    border: 1px solid #DCDFE6;
+    box-sizing: border-box;
+    color: #606266;
+    display: inline-block;
+    font-size: inherit;
+    height: 32px;
+    line-height: 40px;
+    outline: 0;
+    padding: 0 15px;
+    transition: border-color .2s cubic-bezier(.645,.045,.355,1);
+    width: 100%;
+}
+.el-button--danger {
+    margin-top: 18px;
+    line-height: 10px;
+    color: #FFF;
+    background-color: #F56C6C;
+    border-color: #F56C6C;
+    width: 300px;
+    height: 34px;
+}
+.checkbox{
+  margin-top: 15px;
+  display: flex;
+  justify-content: space-between;
+}
+.lasttest{
+  display: inline-block;
+  margin-top: 30px;
+  margin-left: 80px;
+  color:rgb(24, 109, 207)
 }
 </style>
