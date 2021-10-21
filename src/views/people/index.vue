@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div ref="appRef">
     <el-form ref="form" label-width="80px">
   <el-form-item label="头像:">
     <img :src="GET_PHOTO" style="width:80px;height:80px;border-radius: 50%">
@@ -12,6 +12,7 @@
   </el-form-item>
   <el-form-item>
     <el-button @click="quit">退出</el-button>
+    <xx-button :buttons="this.buttons"></xx-button>
   </el-form-item>
 </el-form>
   </div>
@@ -19,20 +20,33 @@
 
 <script>
 import { mapGetters } from 'vuex'
-import { sceneMixin } from '../../utils/testMixin'
+import XxButton from '../../components/XxButton.vue'
+// import { drawMixin } from '../../utils/testMixin'
 export default {
-  mixins: [sceneMixin],
+  // mixins: [drawMixin],
   data () {
     return {
+      buttons: [
+        {
+          label: '创建',
+          icon: 'el-icon-circle-plus-outline',
+          click: this.add
+        },
+        {
+          label: '修改',
+          icon: 'el-icon-edit-outline',
+          click: this.update
+        }
+      ]
     }
   },
-  components: {},
+  components: { XxButton },
   computed: {
     ...mapGetters(['GET_NAME', 'GET_ROLE', 'GET_PHOTO'])
   },
-  created () {},
+  created () {
+  },
   mounted () {
-    // this.test1()
   },
   destroyed () {},
   methods: {
@@ -41,8 +55,11 @@ export default {
       sessionStorage.clear() // 清空sessionstorage里面的所有数据
       window.location.reload() // 刷新vuex
     },
-    test1 () {
-      // console.log('组件里面的test1')
+    add () {
+      console.log('add')
+    },
+    update () {
+      console.log('update')
     }
   }
 }

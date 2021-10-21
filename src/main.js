@@ -8,6 +8,7 @@ import 'element-ui/lib/theme-chalk/index.css'
 import './mock/api.js'
 import '@/utils/permission.js'
 import './assets/sass/index.scss'
+import './components/index'
 Vue.config.productionTip = false
 Vue.prototype.$axios = axios
 Vue.use(ElementUI)

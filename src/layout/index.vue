@@ -11,7 +11,8 @@
             'el-icon-s-unfold' : isCollapse
           }"
           style="cursor: pointer" @click="isCollapse = !isCollapse"> </i>
-          <span style="margin-left: 10px">wjc-vue-template</span>
+          <span style="margin-left: 10px;">wjc-vue-template</span>
+          <span style="marginLeft:22px">{{nowdata}}</span>
         </div>
         <el-dropdown>
           <div class="avatar-warp">
@@ -43,7 +44,8 @@ export default {
   name: 'LayoutIndex',
   data () {
     return {
-      isCollapse: false
+      isCollapse: false,
+      nowdata: null
     }
   },
 
@@ -54,7 +56,9 @@ export default {
     ...mapGetters(['GET_NAME', 'GET_PHOTO'])
   },
   created () { },
-  mounted () { },
+  mounted () {
+    this.getTimes()
+  },
   destroyed () { },
   methods: {
     quit () {
@@ -64,6 +68,41 @@ export default {
     },
     toPeople () {
       this.$router.push('/people')
+    },
+    getTimes () {
+      clearTimeout(this.nowdata)
+      var date = new Date()
+      var year = (date.getFullYear() + '').padStart(2, '0')
+      var month = (date.getMonth() + 1 + '').padStart(2, '0')
+      var day = (date.getDate() + '').padStart(2, '0')
+      var hours = (date.getHours() + '').padStart(2, '0')
+      var seconds = (date.getSeconds() + '').padStart(2, '0')
+      var min = (date.getMinutes() + '').padStart(2, '0')
+      var week = date.getDay()
+      switch (week) {
+        case 0:
+          week = '星期天'
+          break
+        case 1:
+          week = '星期一'
+          break
+        case 2:
+          week = '星期二'
+          break
+        case 3:
+          week = '星期三'
+          break
+        case 4:
+          week = '星期四'
+          break
+        case 5:
+          week = '星期五'
+          break
+        case 6:
+          week = '星期六'
+      }
+      this.nowdata = setTimeout(this.getTimes, 1000)
+      this.nowdata = `${year}/${month}/${day} ${week} ${hours}:${min}:${seconds}`
     }
   }
 }

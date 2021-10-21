@@ -1,5 +1,5 @@
 <template>
-  <div class="login-container">
+  <div class="login-container" ref="appRef">
     <div class="login-box">
       <div class="box-left">
         <div class="left-text">
@@ -41,9 +41,11 @@
 </template>
 
 <script>
+// import { drawMixin } from '../../utils/testMixin'
 import { login } from '@/api/user'
+// import { mixin } from 'vue/types/umd'
 export default {
-
+  // mixins: [drawMixin],
   data () {
     return {
       form: {

@@ -9,3 +9,12 @@ export const login = data => {
     data
   })
 }
+// 通用获取表单数据
+export function gettableData (data) {
+  return request({
+    method: 'GET',
+    url: data.url,
+    // data用来设置POST请求体
+    data
+  })
+}
