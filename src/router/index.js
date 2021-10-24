@@ -106,8 +106,27 @@ const routes = [
         name: 'power',
         component: () => import('@/views/power'),
         meta: {
-          title: '权限页面',
-          role: ['admin']
+          title: '权限页面'
+        }
+      }
+    ]
+  },
+  {
+    path: '/lxtF',
+    name: 'lxtF',
+    component: Layout,
+    redirect: '/lxt',
+    meta: {
+      icon: 'el-icon-picture',
+      title: '3D 相册'
+    },
+    children: [
+      {
+        path: '/lxt',
+        name: 'lxt',
+        component: () => import('@/views/lxt'),
+        meta: {
+          title: '3D 相册'
         }
       }
     ]
@@ -167,7 +186,22 @@ router.beforeEach((to, from, next) => {
     } else {
       // 有token 获取当前角色的信息
       next()
-      login(logintoken).then(res => {
+      const role = sessionStorage.getItem('roles')
+      // console.log(role, 'role')
+      var loginData
+      if (role === '0') {
+        loginData = {
+          account: 'test',
+          password: 'test'
+        }
+      } else {
+        loginData = {
+          account: 'wjc',
+          password: '000919'
+        }
+      }
+      login(loginData).then(res => {
+        // console.log(loginData, '---')
         const userInfo = res.data.data
         // 把角色的数据存入vuex
         // console.log('123')

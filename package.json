@@ -10,6 +10,7 @@
   "dependencies": {
     "axios": "^0.22.0",
     "core-js": "^3.6.5",
+    "echarts": "^5.2.1",
     "element-ui": "^2.15.6",
     "mock": "^0.1.1",
     "mockjs": "^1.1.0",

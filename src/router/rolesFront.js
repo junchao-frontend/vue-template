@@ -16,6 +16,7 @@ const role1 = [
   'home', 'homeF',
   'dataCenter', 'echart', 'form', 'table', 'api',
   'power', 'powerF', // 权限管理
+  'lxt', 'lxtF',
   'people', 'peopleF'
 ]
 

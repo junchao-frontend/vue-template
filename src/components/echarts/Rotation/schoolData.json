@@ -1,0 +1,249 @@
+{
+    "data": [
+        {
+            "name": "迁建指挥部",
+            "number": "45",
+            "people": "765"
+        },
+        {
+            "name": "留学生公寓",
+            "number": "44",
+            "people": "765"
+        },
+        {
+            "name": "组团五建筑与艺术学院",
+            "number": "43",
+            "people": "765"
+        },
+        {
+            "name": "工程实训中心",
+            "number": "42",
+            "people": "765"
+        },
+        {
+            "name": "四社区配套楼",
+            "number": "41",
+            "people": "765"
+        },
+        {
+            "name": "四社区D座",
+            "number": "40D",
+            "people": "765"
+        },
+        {
+            "name": "四社区C座",
+            "number": "40C",
+            "people": "765"
+        },
+        {
+            "name": "四社区B座",
+            "number": "40B",
+            "people": "765"
+        },
+        {
+            "name": "四社区A座",
+            "number": "40A",
+            "people": "765"
+        },
+        {
+            "name": "数理与工程、医学院、生命科学与食品工程、园林与生态工程学院",
+            "number": "36",
+            "people": "765"
+        },
+        {
+            "name": "冷热源站2#",
+            "number": "35",
+            "people": "765"
+        },
+        {
+            "name": "第三食堂与后勤服务楼",
+            "number": "34",
+            "people": "765"
+        },
+        {
+            "name": "校医院",
+            "number": "33",
+            "people": "765"
+        },
+        {
+            "name": "第一后勤服务楼",
+            "number": "32",
+            "people": "765"
+        },
+        {
+            "name": "三社区配套",
+            "number": "31",
+            "people": "765"
+        },
+        {
+            "name": "三社区C座",
+            "number": "30C",
+            "people": "765"
+        },
+        {
+            "name": "三社区B座",
+            "number": "30B",
+            "people": "765"
+        },
+        {
+            "name": "三社区A座",
+            "number": "30A",
+            "people": "765"
+        },
+        {
+            "name": "水电学院水工结构及材料试验厂",
+            "number": "29",
+            "people": "765"
+        },
+        {
+            "name": "水利水电学院",
+            "number": "27",
+            "people": "765"
+        },
+        {
+            "name": "实验主楼",
+            "number": "26",
+            "people": "765"
+        },
+        {
+            "name": "土木工程学院",
+            "number": "25",
+            "people": "765"
+        },
+        {
+            "name": "能源与环境工程学院",
+            "number": "24",
+            "people": "765"
+        },
+        {
+            "name": "二社区配套",
+            "number": "22",
+            "people": "765"
+        },
+        {
+            "name": "二社区E座",
+            "number": "21E",
+            "people": "765"
+        },
+        {
+            "name": "二社区D座",
+            "number": "21D",
+            "people": "765"
+        },
+        {
+            "name": "二社区C座",
+            "number": "21C",
+            "people": "765"
+        },
+        {
+            "name": "二社区B座",
+            "number": "21B",
+            "people": "765"
+        },
+        {
+            "name": "二社区A座",
+            "number": "21A",
+            "people": "765"
+        },
+        {
+            "name": "第二食堂与后勤服务站",
+            "number": "20",
+            "people": "765"
+        },
+        {
+            "name": "材料、矿业、地球学院",
+            "number": "17",
+            "people": "765"
+        },
+        {
+            "name": "信息与电气工程学院",
+            "number": "16",
+            "people": "765"
+        },
+        {
+            "name": "机械与装备工程学院",
+            "number": "15",
+            "people": "765"
+        },
+        {
+            "name": "一社区配套",
+            "number": "14",
+            "people": "765"
+        },
+        {
+            "name": "冷热源站1#",
+            "number": "13",
+            "people": "456"
+        },
+        {
+            "name": "一社区E座",
+            "number": "12E",
+            "people": "135"
+        },
+        {
+            "name": "一社区D座",
+            "number": "12D",
+            "people": "631"
+        },
+        {
+            "name": "一社区C座",
+            "number": "12C",
+            "people": "862"
+        },
+        {
+            "name": "一社区B座",
+            "number": "12B",
+            "people": "432"
+        },
+        {
+            "name": "一社区A座",
+            "number": "12A",
+            "people": "741"
+        },
+        {
+            "name": "组团一",
+            "number": "9",
+            "people": "526"
+        },
+        {
+            "name": "体育综合馆",
+            "number": "8",
+            "people": "936"
+        },
+        {
+            "name": "行政服务中心",
+            "number": "7",
+            "people": "975"
+        },
+        {
+            "name": "6号楼",
+            "number": "6",
+            "people": "436"
+        },
+        {
+            "name": "学术会议中心",
+            "number": "5",
+            "people": "285"
+        },
+        {
+            "name": "科研楼",
+            "number": "4",
+            "people": "456"
+        },
+        {
+            "name": "第二公共教学楼",
+            "number": "3",
+            "people": "112"
+        },
+        {
+            "name": "第一公共教学楼",
+            "number": "2",
+            "people": "795"
+        },
+        {
+            "name": "图书馆",
+            "number": "1",
+            "people": "765"
+        }
+    ]
+}

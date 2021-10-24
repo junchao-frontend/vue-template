@@ -12,7 +12,7 @@
   </el-form-item>
   <el-form-item>
     <el-button @click="quit">退出</el-button>
-    <xx-button :buttons="this.buttons"></xx-button>
+    <!-- <xx-button :buttons="this.buttons"></xx-button> -->
   </el-form-item>
 </el-form>
   </div>
@@ -20,7 +20,7 @@
 
 <script>
 import { mapGetters } from 'vuex'
-import XxButton from '../../components/XxButton.vue'
+// import XxButton from '../../components/XxButton.vue'
 // import { drawMixin } from '../../utils/testMixin'
 export default {
   // mixins: [drawMixin],
@@ -40,7 +40,7 @@ export default {
       ]
     }
   },
-  components: { XxButton },
+  // components: { XxButton },
   computed: {
     ...mapGetters(['GET_NAME', 'GET_ROLE', 'GET_PHOTO'])
   },

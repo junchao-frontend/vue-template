@@ -40,7 +40,7 @@
 </template>
 
 <script>
-import { gettableData } from '@/api/user.js'
+// import { gettableData } from '@/api/user.js'
 export default {
   components: {},
   props: {
@@ -53,7 +53,78 @@ export default {
     return {
       table_config: {
         thead: [],
-        table_data: [],
+        table_data: [
+          {
+            loginName: '王军潮',
+            power: 'api管理,角色管理',
+            creatTime: '2021/10/15',
+            manager: '代理商1',
+            state: '启用'
+          },
+          {
+            loginName: '于森',
+            power: 'api管理,账号管理',
+            creatTime: '2021/10/16',
+            manager: '代理商2',
+            state: '禁用'
+          },
+          {
+            loginName: '石平',
+            power: 'api管理,角色管理',
+            creatTime: '2021/10/17',
+            manager: '代理商3',
+            state: '启用'
+          },
+          {
+            loginName: '刘沛申',
+            power: 'api管理,权限管理',
+            creatTime: '2021/10/18',
+            manager: '代理商4',
+            state: '禁用'
+          },
+          {
+            loginName: '尹梦淞',
+            power: '角色管理,权限管理',
+            creatTime: '2021/10/19',
+            manager: '代理商5',
+            state: '启用'
+          },
+          {
+            loginName: '周浩露',
+            power: '账号管理,权限管理',
+            creatTime: '2021/10/22',
+            manager: '代理商6',
+            state: '禁用'
+          },
+          {
+            loginName: '张蓝宁',
+            power: '角色管理,权限管理',
+            creatTime: '2021/10/20',
+            manager: '代理商7',
+            state: '启用'
+          },
+          {
+            loginName: '刘学彤',
+            power: 'api管理,权限管理',
+            creatTime: '2021/10/21',
+            manager: '代理商8',
+            state: '禁用'
+          },
+          {
+            loginName: '曹旭',
+            power: '账号管理,权限管理',
+            creatTime: '2021/10/22',
+            manager: '代理商9',
+            state: '禁用'
+          },
+          {
+            loginName: '赵浩男',
+            power: '账号管理,权限管理',
+            creatTime: '2021/10/22',
+            manager: '代理商10',
+            state: '启用'
+          }
+        ],
         url: ''
       },
       per_page: 40,
@@ -81,19 +152,19 @@ export default {
       }
       this.loadtableData()
     },
-    loadtableData () {
-      const requestData = {
-        url: this.table_config.url
-      }
-      gettableData(requestData).then(res => {
-        // console.log(res)
-        const resData = res.data.data
-        this.table_config.table_data = resData.tabledata
-        // this.totalpage = resData.pagedata.totalpage
-        // this.page = resData.pagedata.page
-        // this.per_page = resData.pagedata.per_page
-      })
-    },
+    // loadtableData () {
+    //   const requestData = {
+    //     url: this.table_config.url
+    //   }
+    //   gettableData(requestData).then(res => {
+    //     // console.log(res)
+    //     const resData = res.data.data
+    //     this.table_config.table_data = resData.tabledata
+    //     // this.totalpage = resData.pagedata.totalpage
+    //     // this.page = resData.pagedata.page
+    //     // this.per_page = resData.pagedata.per_page
+    //   })
+    // },
     handleSizeChange (val) {
       // console.log(`每页 ${val} 条`)
     },

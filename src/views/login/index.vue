@@ -10,10 +10,10 @@
           <div class="ceshi">
           <form class="form-container">
             <label for="fname">User Name</label><br>
-            <el-input v-model="form.name"></el-input><br><br>
+            <el-input v-model="form.account"></el-input><br><br>
             <label for="lname">Password</label><br>
             <el-input v-model="form.password"></el-input><br>
-            <el-button type="danger" @click="onSubmit">Log In</el-button><br>
+            <el-button type="danger" @click="onSubmit(form)">Log In</el-button><br>
             <div class="checkbox">
             <el-checkbox v-model="checked">Remember Me</el-checkbox>
             <span style="color:rgb(24, 109, 207)">Forgot Password?</span>
@@ -49,8 +49,8 @@ export default {
   data () {
     return {
       form: {
-        name: 'admin',
-        password: 'admin'
+        account: 'test',
+        password: 'test'
       },
       checked: true
     }
@@ -58,7 +58,9 @@ export default {
   components: {},
   computed: {},
   created () {},
-  mounted () {},
+  mounted () {
+    // this.showData()
+  },
   destroyed () {},
   methods: {
     // onSubmit (form) {
@@ -81,8 +83,9 @@ export default {
     //     })
     //   })
     // }
-    onSubmit () {
-      login().then(res => {
+    onSubmit (a) {
+      login(a).then(res => {
+        console.log(res)
         const userInfo = res.data.data
         const token = userInfo.token
         const roles = userInfo.role
@@ -211,6 +214,7 @@ export default {
   justify-content: space-between;
 }
 .lasttest{
+  cursor: pointer;
   display: inline-block;
   margin-top: 30px;
   margin-left: 80px;
