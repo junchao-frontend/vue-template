@@ -3,14 +3,14 @@ import App from './App.vue'
 import router from './router'
 import store from './store'
 import ElementUI from 'element-ui'
+import 'element-ui/lib/theme-chalk/index.css' // 全局引入element ui
 import axios from 'axios'
-import 'element-ui/lib/theme-chalk/index.css'
-import './mock/api.js'
-import '@/utils/permission.js'
-import './assets/sass/index.scss'
+// import './mock/api.js' 之前用mock模拟的接口
+import '@/utils/permission.js' // 全局引入自定义权限指令
+import './assets/scss/index.scss'// 全局样式
 import './components/index'
-import * as echarts from 'echarts'
-import dataV from '@jiaminghi/data-view'
+import * as echarts from 'echarts'// 全局引入echarts 新版引入方式
+import dataV from '@jiaminghi/data-view'// 全局dataV组件
 Vue.config.productionTip = false
 Vue.prototype.$axios = axios
 Vue.prototype.$echarts = echarts

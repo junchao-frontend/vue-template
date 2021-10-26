@@ -1,10 +1,6 @@
 <template>
 <div class="container">
-    <!-- <el-button v-permission = "{role:['admin']}">管理员能看见</el-button>
-    <el-button v-permission = "{role:['student']}">学生能看见</el-button>
-    <el-button v-permission = "{role:['admin', 'student']}">都能看见</el-button>
-    <el-button v-disabled = "{effect:'disabled'}">禁用按钮</el-button> -->
-<el-row :gutter="40" style="margin-left: 20px;margin-right:20px; margin-top: 35px;">
+<el-row :gutter="40" style="margin-left: 20px;margin-right:20px; margin-top: 40px;">
   <el-col :span="6">
     <div class="grid-content">
       <div class="icon-style">
@@ -84,6 +80,7 @@ export default {
 }
 </script>
 <style lang='scss' scoped>
+// @import './test.scss';
 .el-row {
     margin-bottom: 20px;
     &:last-child {
@@ -107,7 +104,7 @@ export default {
     background-color: #f9fafc;
   }
   .container{
-    justify-content: center;
+    overflow: hidden;
     flex-direction: column;
     display: flex;
   }
@@ -122,10 +119,10 @@ export default {
     height: 150px;
   }
   .big_box{
-    margin-top: 35px;
+    margin-top: 40px;
     margin-left: 40px;
     margin-right:40px;
-    height: 400px;
+    height: 500px;
     // border: 1px solid red;
   }
   .icon-style{

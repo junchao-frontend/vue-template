@@ -52,7 +52,7 @@ export default {
     return {
       userRoutes: [],
       childArr: [],
-      allRole,
+      // allRole,
       routerMapping: {}
     }
   },
@@ -100,7 +100,7 @@ export default {
     //   console.log(childArr, 'childArr')
     // },
     initRouter () {
-      const routerInit = this.$router.options.routes
+      const routerInit = this.$router.options.routes // 获取所有路由
       // console.log(routerInit, 'routerInit')
       const userRoutes = []
       routerInit.forEach(item => {
@@ -119,12 +119,14 @@ export default {
       // console.log(userRoutes, 'userRoutes')
     },
     isExistInRouter (item) {
-      // 这个函数用来筛选一下路由 筛选出没有设置hidden的路由
+      // 这个函数用来筛选一下路由 筛选出没有设置hidden 而且在权限之内的路由
       return !!(item.hidden === undefined && this.routerMapping.toString().indexOf(item.name) !== -1)
+      // 双！返回布尔值
     },
     roleinit () {
+      // console.log(allRole)
       const roles = sessionStorage.getItem('roles')
-      this.routerMapping = this.allRole['role' + roles]
+      this.routerMapping = allRole['role' + roles]
       // console.log(this.routerMapping.toString(), 'routerMapping')
       // console.log(typeof this.routerMapping, 'routerMapping')
     }

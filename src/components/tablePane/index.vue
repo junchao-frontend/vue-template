@@ -150,7 +150,7 @@ export default {
           this.table_config[key] = this.config[key]
         }
       }
-      this.loadtableData()
+      // this.loadtableData()
     },
     // loadtableData () {
     //   const requestData = {

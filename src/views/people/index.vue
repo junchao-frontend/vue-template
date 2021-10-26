@@ -14,6 +14,10 @@
     <el-button @click="quit">退出</el-button>
     <!-- <xx-button :buttons="this.buttons"></xx-button> -->
   </el-form-item>
+  <!-- <el-button v-permission = "{role:['admin']}">管理员能看见</el-button>
+    <el-button v-permission = "{role:['student']}">学生能看见</el-button>
+    <el-button v-permission = "{role:['admin', 'student']}">都能看见</el-button>
+    <el-button v-disabled = "{effect:'disabled'}">禁用按钮</el-button> -->
 </el-form>
   </div>
 </template>

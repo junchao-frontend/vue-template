@@ -5,7 +5,7 @@ Vue.use(Vuex)
 
 export default new Vuex.Store({
   state: {
-    currentPage: '',
+    currentPage: '', // 用来存储当前路由
     token: sessionStorage.getItem('token'),
     name: '',
     role: [],

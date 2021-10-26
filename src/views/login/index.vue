@@ -12,7 +12,7 @@
             <label for="fname">User Name</label><br>
             <el-input v-model="form.account"></el-input><br><br>
             <label for="lname">Password</label><br>
-            <el-input v-model="form.password"></el-input><br>
+            <el-input v-model="form.password" show-password></el-input><br>
             <el-button type="danger" @click="onSubmit(form)">Log In</el-button><br>
             <div class="checkbox">
             <el-checkbox v-model="checked">Remember Me</el-checkbox>
@@ -41,7 +41,7 @@
 </template>
 
 <script>
-// import { drawMixin } from '../../utils/testMixin'
+// import { allRole } from '../../router/rolesFront'
 import { login } from '@/api/user'
 // import { mixin } from 'vue/types/umd'
 export default {
@@ -49,8 +49,8 @@ export default {
   data () {
     return {
       form: {
-        account: 'test',
-        password: 'test'
+        account: '',
+        password: ''
       },
       checked: true
     }
@@ -85,21 +85,22 @@ export default {
     // }
     onSubmit (a) {
       login(a).then(res => {
-        console.log(res)
-        const userInfo = res.data.data
-        const token = userInfo.token
-        const roles = userInfo.role
-        const name = userInfo.name
-        const photo = userInfo.photo
-        sessionStorage.setItem('token', token)
-        sessionStorage.setItem('roles', roles)
-        this.$store.commit('SET_NAME', name)
-        this.$store.commit('SET_ROLE', roles)
-        this.$store.commit('SET_PHOTO', photo)
-        this.$store.commit('SET_TOKEN', token)
-        // console.log(userInfo)
-        this.$router.push('/home')
-        // console.log('.then')
+        if (res.data.code === 1000) {
+          const userInfo = res.data.data
+          const token = userInfo.token
+          const roles = userInfo.role
+          const name = userInfo.name
+          const photo = userInfo.photo
+          sessionStorage.setItem('token', token)
+          sessionStorage.setItem('roles', roles)
+          this.$store.commit('SET_NAME', name)
+          this.$store.commit('SET_ROLE', roles)
+          this.$store.commit('SET_PHOTO', photo)
+          this.$store.commit('SET_TOKEN', token)
+          this.$router.push('/home')
+        } else {
+          alert('抱歉,您输入的账号密码不存在,请重新输入')
+        }
       })
       // console.log('外部函数')
     }
