@@ -3,12 +3,15 @@ import VueRouter from 'vue-router'
 import Layout from '@/layout/index'
 import { login } from '../api/user'
 import store from '../store'
-import Test1 from '@/views//dataCenter/echart'
-import Test2 from '@/views//dataCenter/form'
-import Test3 from '@/views//dataCenter/table'
-import Test4 from '@/views//dataCenter/api'
-import Test5 from '@/views/home'
 import { allRole } from '@/router/rolesFront.js'// 导入角色对应的路由
+import NProgress from 'nprogress' // 引入进度条
+import 'nprogress/nprogress.css'
+import test1 from '../views/dataCenter/echart'
+import test2 from '../views/dataCenter/form'
+import test3 from '../views/dataCenter/table'
+import test4 from '../views/dataCenter/api'
+import test5 from '../views/people'
+import test6 from '../views/rolebutton'
 Vue.use(VueRouter)
 // vue-router路由版本更新产生的问题,导致路由跳转失败抛出该错误，但并不影响程序功能
 const originalPush = VueRouter.prototype.push
@@ -16,6 +19,14 @@ VueRouter.prototype.push = function push (location, onResolve, onReject) {
   if (onResolve || onReject) return originalPush.call(this, location, onResolve, onReject)
   return originalPush.call(this, location).catch(err => err)
 }
+
+NProgress.configure({
+  easing: 'ease', // 动画方式
+  speed: 600, // 递增进度条的速度
+  showSpinner: false, // 是否显示加载ico
+  trickleSpeed: 200, // 自动递增间隔
+  minimum: 0.5 // 初始化时的最小百分比
+})
 const routes = [
   {
     path: '/',
@@ -35,13 +46,13 @@ const routes = [
     component: Layout,
     meta: {
       icon: 'el-icon-s-home',
-      title: '首页'
+      title: 'Dashboard'
     },
     children: [
       {
         path: '/home',
         name: 'home',
-        component: Test5,
+        component: () => import('@/views/home'),
         meta: {
           title: '首页'
         }
@@ -52,7 +63,7 @@ const routes = [
     path: '/dataCenter',
     name: 'dataCenter',
     component: Layout,
-    redirect: '/dataCenter/form',
+    redirect: '/dataCenter/echart',
     meta: {
       icon: 'el-icon-s-data',
       title: '数据中心'
@@ -61,7 +72,7 @@ const routes = [
       {
         path: '/dataCenter/echart',
         name: 'echart',
-        component: Test1,
+        component: test1,
         meta: {
           title: '可视化组件'
         }
@@ -69,7 +80,7 @@ const routes = [
       {
         path: '/dataCenter/form',
         name: 'form',
-        component: Test2,
+        component: test2,
         meta: {
           title: '表格组件'
         }
@@ -77,7 +88,7 @@ const routes = [
       {
         path: '/dataCenter/table',
         name: 'table',
-        component: Test3,
+        component: test3,
         meta: {
           title: '表单组件'
         }
@@ -85,7 +96,7 @@ const routes = [
       {
         path: '/dataCenter/api',
         name: 'api',
-        component: Test4,
+        component: test4,
         meta: {
           title: 'api组件'
         }
@@ -105,10 +116,7 @@ const routes = [
       {
         path: '/power',
         name: 'power',
-        component: () => import('@/views/power'),
-        meta: {
-          title: '权限页面'
-        }
+        component: () => import('@/views/power')
       }
     ]
   },
@@ -125,10 +133,7 @@ const routes = [
       {
         path: '/rolebutton',
         name: 'rolebutton',
-        component: () => import('@/views/rolebutton'),
-        meta: {
-          title: '指令按钮'
-        }
+        component: test6
       }
     ]
   },
@@ -145,10 +150,7 @@ const routes = [
       {
         path: '/people',
         name: 'people',
-        component: () => import('@/views/people'),
-        meta: {
-          title: '个人中心'
-        }
+        component: test5
       }
     ]
   },
@@ -166,25 +168,49 @@ const routes = [
 ]
 const router = new VueRouter({
   // mode: 'history',
-  base: process.env.BASE_URL,
+  // 解决vue框架页面跳转有白色不可追踪色块的bug
+  scrollBehavior (to, from, savedPosition) {
+    return { x: 0, y: 0 }
+  },
   routes
+})
+
+// 解决Loading chunk (\d)+ failed问题
+router.onError((error) => {
+  console.error(error)
+  const pattern = /Loading chunk/g
+  // const pattern = /Loading chunk (\d)+ failed/g
+  const isChunkLoadFailed = error.message.match(pattern)
+  const targetPath = router.history.pending.fullPath
+  if (isChunkLoadFailed && error.type === 'missing') {
+    // const targetPath = router.history.pending.fullPath
+    router.push(targetPath)
+  }
 })
 // 路由守卫
 router.beforeEach((to, from, next) => {
-  // console.log(to, '----')
+  // console.log(to)
   // to 是 访问界面
   // from 是来自哪
   // next是放行方法
+  const logintoken = sessionStorage.getItem('token') // 从sessionstorage拿到token
+  if (logintoken && to.path === '/login') {
+    next('/home')
+  }
+  NProgress.start()
+  // 若加载时间长且不定，担心进度条走完都没有加载完，可以调用
+  NProgress.inc()// 这会以随机数量递增，且永远达不到100%，也可以设指定增量
+  // console.log(logintoken)
   // 如果去登录界面 直接放行
   store.commit('insertCurrentPage', to.fullPath) // 将访问的路由存入到vuex之中 之后在侧边栏高亮显示
+  // 先判断有没有token 如果已经获取到了token还想去登录界面则回到主界面
   if (to.path === '/login') { // 如果是去登录界面直接放行
     next()
   } else {
-    // 如果不是去登录界面 判断有没有token
-    const logintoken = sessionStorage.getItem('token') // 从sessionstorage拿到token
     if (!logintoken) { // 如果没有token 则要去登录界面
       next('/') // 如果这里路径写 /login  则不需要上面根路径的重定向
     } else {
+      // console.log(logintoken)
       // 有token的情况则要判断要访问的路由是否在权限之内
       // 拿到权限信息 之后进行判断
       const role = sessionStorage.getItem('roles')
@@ -216,6 +242,10 @@ router.beforeEach((to, from, next) => {
         next('/404')
       }
     }
+    router.afterEach(() => {
+      // 在即将进入新的页面组件前，关闭掉进度条
+      NProgress.done()
+    })
   }
 })
 

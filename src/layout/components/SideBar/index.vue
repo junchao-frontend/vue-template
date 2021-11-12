@@ -73,6 +73,8 @@ export default {
     this.roleinit() // 获取角色对应的路由
     this.initRouter()
   },
+  watch: {
+  },
   destroyed () { },
   methods: {
     // showdata () {

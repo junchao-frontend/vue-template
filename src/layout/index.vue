@@ -1,18 +1,20 @@
 <template>
   <el-container class="layout-container">
-    <el-aside class="aside" :width="isCollapse ? '64px' : '200px'">
+    <el-aside class="aside" :width="isCollapse ? '64px' : '205px'">
       <SideBar :is-collapse="isCollapse" />
     </el-aside>
     <el-container>
       <el-header class="header">
-        <div>
+        <span>
           <i :class="{
             'el-icon-s-fold' : !isCollapse ,
             'el-icon-s-unfold' : isCollapse
           }"
-          style="cursor: pointer" @click="isCollapse = !isCollapse"> </i>
-          <span style="margin-left: 10px;">wjc-vue-template</span>
-          <span style="marginLeft:22px">{{nowdata}}</span>
+          style="cursor: pointer;font-size:15px" @click="isCollapse = !isCollapse"> </i>
+          <!-- <span style="marginLeft:22px">{{nowdata}}</span> -->
+        </span>
+        <div  class="breadcrumb">
+          <BreadCrumb></BreadCrumb>
         </div>
         <el-dropdown>
           <div class="avatar-warp">
@@ -37,6 +39,7 @@
 
 <script>
 import SideBar from '../layout/components/SideBar'
+import BreadCrumb from '../layout/components/BreadCrumb'
 // import { sceneMixin } from '../utils/testMixin'
 import { mapGetters } from 'vuex'
 export default {
@@ -50,14 +53,20 @@ export default {
   },
 
   components: {
-    SideBar: SideBar
+    SideBar: SideBar,
+    BreadCrumb: BreadCrumb
   },
   computed: {
     ...mapGetters(['GET_NAME', 'GET_PHOTO'])
   },
   created () { },
   mounted () {
-    this.getTimes()
+    // this.getTimes()
+    // if (window.history && window.history.pushState) {
+    //   // 向历史记录中插入了当前页
+    //   history.pushState(null, null, document.URL)
+    //   window.addEventListener('popstate', this.goBack, false)
+    // }
   },
   destroyed () { },
   methods: {
@@ -123,11 +132,19 @@ export default {
   background-color: #e9eef3;
 }
 .header {
-  background-color: #b3c0d1;
+  position: relative;
+  background-color: rgb(247,247,247);
   color: #333;
   line-height: 60px;
   display: flex;
+  align-items: center;
   justify-content: space-between;
+}
+.breadcrumb{
+  position: absolute;
+  left: 47px;
+  display: flex;
+  align-items: center;
 }
 .portrait{
   width: 40px;

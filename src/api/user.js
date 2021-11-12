@@ -9,6 +9,15 @@ export const login = data => {
     data
   })
 }
+
+// 注册用户
+export const registerUser = data => {
+  return request({
+    method: 'POST',
+    url: '/user',
+    data
+  })
+}
 // 通用获取表单数据
 // export function gettableData (data) {
 //   return request({

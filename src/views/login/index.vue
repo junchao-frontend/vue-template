@@ -19,7 +19,7 @@
             <span style="color:rgb(24, 109, 207)">Forgot Password?</span>
             </div>
             <hr style="marginTop:28px">
-            <span class="lasttest">Register New User</span>
+            <span class="lasttest" @click="dialogFormVisible = true">Register New User</span>
           </form>
           </div>
         </div>
@@ -37,12 +37,38 @@
         </div>
       </div>
     </div>
+  <el-dialog title="用户注册" :visible.sync="dialogFormVisible" class="dialog">
+    <el-form :model="form">
+      <el-form-item label="账号" :label-width="formLabelWidth">
+        <el-input v-model="newuser.account" autocomplete="off" style="width:200px;margin-left:25px"></el-input>
+      </el-form-item>
+      <el-form-item label="密码" :label-width="formLabelWidth">
+        <el-input v-model="newuser.password" autocomplete="off" style="width:200px;margin-left:25px"></el-input>
+      </el-form-item>
+      <el-form-item label="姓名" :label-width="formLabelWidth">
+        <el-input v-model="newuser.name" autocomplete="off" style="width:200px;margin-left:25px"></el-input>
+      </el-form-item>
+      <el-form-item label="头像" :label-width="formLabelWidth">
+        <el-input v-model="newuser.url" autocomplete="off" style="width:200px;margin-left:25px"></el-input>
+      </el-form-item>
+      <el-form-item label="角色" :label-width="formLabelWidth">
+        <el-select v-model="newuser.role" placeholder="请选择权限" style="width:200px;margin-left:25px">
+          <el-option label="一级权限" value="1"></el-option>
+          <el-option label="二级权限" value="0"></el-option>
+        </el-select>
+      </el-form-item>
+    </el-form>
+    <div slot="footer" class="dialog-footer">
+      <el-button @click="dialogFormVisible = false">取 消</el-button>
+      <el-button type="primary" @click="register(newuser)">确 定</el-button>
+    </div>
+  </el-dialog>
 </div>
 </template>
 
 <script>
 // import { allRole } from '../../router/rolesFront'
-import { login } from '@/api/user'
+import { login, registerUser } from '@/api/user'
 // import { mixin } from 'vue/types/umd'
 export default {
   // mixins: [drawMixin],
@@ -52,7 +78,16 @@ export default {
         account: '',
         password: ''
       },
-      checked: true
+      newuser: {
+        account: '',
+        password: '',
+        name: '',
+        url: '',
+        role: ''
+      },
+      checked: true,
+      dialogFormVisible: false,
+      formLabelWidth: '60px'
     }
   },
   components: {},
@@ -83,8 +118,16 @@ export default {
     //     })
     //   })
     // }
+    register (aa) {
+      console.log(aa)
+      registerUser(aa).then(res => {
+        // console.log(res)
+        this.dialogFormVisible = false
+      })
+    },
     onSubmit (a) {
       login(a).then(res => {
+        // console.log(res)
         if (res.data.code === 1000) {
           const userInfo = res.data.data
           const token = userInfo.token
@@ -93,6 +136,7 @@ export default {
           const photo = userInfo.photo
           sessionStorage.setItem('token', token)
           sessionStorage.setItem('roles', roles)
+          // console.log(typeof roles)
           this.$store.commit('SET_NAME', name)
           this.$store.commit('SET_ROLE', roles)
           this.$store.commit('SET_PHOTO', photo)
@@ -112,6 +156,12 @@ export default {
 }
 </script>
 <style scoped>
+.dialog{
+  position: absolute;
+  left: 24%;
+  width: 900px;
+  height: 1000px;
+}
 .login-container{
   position: relative;
   width: 100vw;
