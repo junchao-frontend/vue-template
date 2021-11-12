@@ -1,6 +1,6 @@
 <template>
   <div class="container">
-    <router-view />
+      二级菜单2
   </div>
 </template>
 

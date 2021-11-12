@@ -75,8 +75,8 @@ export default {
   data () {
     return {
       form: {
-        account: '',
-        password: ''
+        account: 'wjc',
+        password: '000919'
       },
       newuser: {
         account: '',

@@ -83,13 +83,6 @@ export default {
             state: '禁用'
           },
           {
-            loginName: '尹梦淞',
-            power: '角色管理,权限管理',
-            creatTime: '2021/10/19',
-            manager: '代理商5',
-            state: '启用'
-          },
-          {
             loginName: '周浩露',
             power: '账号管理,权限管理',
             creatTime: '2021/10/22',
@@ -102,20 +95,6 @@ export default {
             creatTime: '2021/10/20',
             manager: '代理商7',
             state: '启用'
-          },
-          {
-            loginName: '刘学彤',
-            power: 'api管理,权限管理',
-            creatTime: '2021/10/21',
-            manager: '代理商8',
-            state: '禁用'
-          },
-          {
-            loginName: '曹旭',
-            power: '账号管理,权限管理',
-            creatTime: '2021/10/22',
-            manager: '代理商9',
-            state: '禁用'
           },
           {
             loginName: '赵浩男',

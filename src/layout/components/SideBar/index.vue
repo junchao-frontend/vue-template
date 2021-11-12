@@ -10,15 +10,6 @@
     active-text-color="#ffd04b"
   >
     <div v-for="item in userRoutes" :key="item.index">
-      <!-- 渲染没有一级菜单 而且没有设置hidden属性 -->
-      <!-- <el-menu-item
-        v-if="item.children === undefined"
-        :index="item.path"
-      >
-        <i :class="item.meta.icon" />
-        <span style="padding-left: 15px">{{ item.meta.title }}</span>
-      </el-menu-item> -->
-      <!-- 渲染只有一个一级菜单的路由 -->
       <el-menu-item
         v-if="item.children.length === 1"
         :index="item.children[0].path"
@@ -29,15 +20,27 @@
       <!--  渲染有多个菜单的路由 -->
       <el-submenu
         v-else
-        :index="item.path"
-      >
+        :index="item.path">
         <template slot="title">
           <i :class="item.meta.icon"></i>
           <span style="padding-left: 15px">{{ item.meta.title }}</span>
         </template>
-        <el-menu-item  v-for="children in item.children" :key="children.index" :index="children.path">
-          <span style="padding-left: 15px">{{children.meta.title}}</span>
+        <div v-for="child in item.children" :key="child.index" >
+          <!-- 先判断二级菜单有没有children 没有的话直接渲染 -->
+        <el-menu-item v-if="!child.children" :index="child.path">
+          <span style="padding-left: 15px">{{child.meta.title}}</span>
         </el-menu-item>
+        <!-- 如果有三级菜单则用submenu -->
+        <el-submenu v-else :index='child.path'>
+          <template slot="title">
+          <span style="padding-left: 15px">{{ child.meta.title }}</span>
+        </template>
+        <el-menu-item v-for="i in child.children" :key="i.name" :index="i.path">
+          <span style="padding-left: 15px">{{i.meta.title}}</span>
+        </el-menu-item>
+        </el-submenu>
+        <!-- ----- -->
+        </div>
       </el-submenu>
     </div>
   </el-menu>
@@ -77,30 +80,6 @@ export default {
   },
   destroyed () { },
   methods: {
-    // showdata () {
-    //   const allRouters = this.$router.options.routes
-    //   const childArr = [] // 定义储存子路由的数组
-    //   const userRoutes = [] // 定义用户数组
-    //   const userrole = sessionStorage.getItem('role')
-    //   allRouters.forEach(item => {
-    //     if (this.routerFilter(item) && item.children) { // 如果没有设置hidden属性 且有子路由
-    //       item.children.forEach(i => {
-    //         if (!i.meta.role) {
-    //           childArr.push(i)
-    //         } else {
-    //           if (i.meta.role.indexOf(userrole) !== -1) {
-    //             childArr.push(i)
-    //           }
-    //         }
-    //       })
-    //       userRoutes.push(item)
-    //     }
-    //   })
-    //   this.userRoutes = userRoutes
-    //   this.childArr = childArr
-    //   console.log(userRoutes, 'userRoutes')
-    //   console.log(childArr, 'childArr')
-    // },
     initRouter () {
       const routerInit = this.$router.options.routes // 获取所有路由
       // console.log(routerInit, 'routerInit')
@@ -109,6 +88,7 @@ export default {
         if (this.isExistInRouter(item)) {
           const childArr = []
           item.children.forEach(itemchildren => {
+            // console.log(itemchildren)
             if (this.isExistInRouter(itemchildren)) {
               childArr.push(itemchildren)
             }
@@ -118,7 +98,7 @@ export default {
         }
       })
       this.userRoutes = userRoutes
-      // console.log(userRoutes, 'userRoutes')
+      console.log(this.userRoutes, 'userRoutes')
     },
     isExistInRouter (item) {
       // 这个函数用来筛选一下路由 筛选出没有设置hidden 而且在权限之内的路由

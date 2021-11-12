@@ -1,6 +1,6 @@
 <template>
   <div class="container">
-    <router-view />
+三级菜单
   </div>
 </template>
 

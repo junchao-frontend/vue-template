@@ -7,7 +7,6 @@ import { allRole } from '@/router/rolesFront.js'// 导入角色对应的路由
 import NProgress from 'nprogress' // 引入进度条
 import 'nprogress/nprogress.css'
 import test1 from '../views/dataCenter/echart'
-import test2 from '../views/dataCenter/form'
 import test3 from '../views/dataCenter/table'
 import test4 from '../views/dataCenter/api'
 import test5 from '../views/people'
@@ -70,7 +69,7 @@ const routes = [
     },
     children: [
       {
-        path: '/dataCenter/echart',
+        path: '/echart',
         name: 'echart',
         component: test1,
         meta: {
@@ -78,15 +77,7 @@ const routes = [
         }
       },
       {
-        path: '/dataCenter/form',
-        name: 'form',
-        component: test2,
-        meta: {
-          title: '表格组件'
-        }
-      },
-      {
-        path: '/dataCenter/table',
+        path: '/table',
         name: 'table',
         component: test3,
         meta: {
@@ -94,12 +85,22 @@ const routes = [
         }
       },
       {
-        path: '/dataCenter/api',
+        path: '/api',
         name: 'api',
         component: test4,
         meta: {
           title: 'api组件'
-        }
+        },
+        children: [
+          {
+            path: '/apiManage',
+            name: 'apiManage',
+            meta: {
+              title: 'api管理'
+            },
+            component: () => import('../views/apiManage')
+          }
+        ]
       }
     ]
   },
@@ -134,6 +135,45 @@ const routes = [
         path: '/rolebutton',
         name: 'rolebutton',
         component: test6
+      }
+    ]
+  },
+  {
+    path: '/routerTest',
+    name: 'routerTest',
+    component: Layout,
+    redirect: '/second',
+    meta: {
+      icon: 'el-icon-aim',
+      title: '动态路由'
+    },
+    children: [
+      {
+        path: '/first',
+        name: 'first',
+        redirect: '/threemenu',
+        meta: {
+          title: '二级菜单1'
+        },
+        component: () => import('../views/routerTest/first'),
+        children: [
+          {
+            path: '/threemenu',
+            name: 'threemenu',
+            meta: {
+              title: '三级菜单'
+            },
+            component: () => import('../views/routerTest/threemenu')
+          }
+        ]
+      },
+      {
+        path: '/second',
+        name: 'second',
+        meta: {
+          title: '二级菜单2'
+        },
+        component: () => import('../views/routerTest/second')
       }
     ]
   },

@@ -1,22 +1,22 @@
 <template>
-  <div>
-    form组件
+  <div class="container">
+api管理
   </div>
 </template>
 
 <script>
 export default {
-
+  components: {},
   data () {
     return {
     }
   },
-
-  components: {},
   computed: {},
   created () {},
   mounted () {},
-  destroyed () {},
   methods: {}
 }
 </script>
+
+<style scoped>
+</style>

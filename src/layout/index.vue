@@ -51,7 +51,6 @@ export default {
       nowdata: null
     }
   },
-
   components: {
     SideBar: SideBar,
     BreadCrumb: BreadCrumb
@@ -62,11 +61,6 @@ export default {
   created () { },
   mounted () {
     // this.getTimes()
-    // if (window.history && window.history.pushState) {
-    //   // 向历史记录中插入了当前页
-    //   history.pushState(null, null, document.URL)
-    //   window.addEventListener('popstate', this.goBack, false)
-    // }
   },
   destroyed () { },
   methods: {
