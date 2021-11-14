@@ -48,12 +48,20 @@ export default {
   data () {
     return {
       isCollapse: false,
-      nowdata: null
+      nowdata: null,
+      screenWidth: document.body.clientWidth //  网页可见区域宽
     }
   },
   components: {
     SideBar: SideBar,
     BreadCrumb: BreadCrumb
+  },
+  watch: {
+    screenWidth (newVal) {
+      if (newVal < 980) {
+        this.isCollapse = true
+      }
+    }
   },
   computed: {
     ...mapGetters(['GET_NAME', 'GET_PHOTO'])
@@ -61,6 +69,11 @@ export default {
   created () { },
   mounted () {
     // this.getTimes()
+    const that = this
+    window.onresize = () => {
+      window.screenWidth = document.body.clientWidth
+      that.screenWidth = window.screenWidth
+    }
   },
   destroyed () { },
   methods: {

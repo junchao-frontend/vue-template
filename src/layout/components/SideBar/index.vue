@@ -98,7 +98,7 @@ export default {
         }
       })
       this.userRoutes = userRoutes
-      console.log(this.userRoutes, 'userRoutes')
+      // console.log(this.userRoutes, 'userRoutes')
     },
     isExistInRouter (item) {
       // 这个函数用来筛选一下路由 筛选出没有设置hidden 而且在权限之内的路由

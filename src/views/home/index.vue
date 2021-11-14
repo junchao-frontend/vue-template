@@ -1,6 +1,6 @@
 <template>
 <div class="container">
-<el-row :gutter="40" style="margin-left: 20px;margin-right:20px; margin-top: 40px;">
+<!-- <el-row :gutter="40" style="margin-left: 20px;margin-right:20px; margin-top: 40px;">
   <el-col :span="6">
     <div class="grid-content">
       <div class="icon-style">
@@ -45,6 +45,52 @@
       </div>
     </div>
     </el-col>
+</el-row> -->
+<el-row :gutter="20" class="panel-group">
+  <el-col :xs="12" :sm="12" :lg="6" class="card-panel-col">
+      <div class="card-panel">
+        <div class="card-panel-icon icon-people">
+          <i class="el-icon-s-management panel-icon"></i>
+        </div>
+        <div class="card-panel-description">
+            <div class="card-panel-text">New Books</div>
+            <count-to :start-val="0" :end-val="102400" :duration="2600" class="card-panel-num" />
+        </div>
+      </div>
+  </el-col>
+<el-col :xs="12" :sm="12" :lg="6" class="card-panel-col">
+      <div class="card-panel">
+        <div class="card-panel-icon icon-people">
+          <i class="el-icon-s-management panel-icon"></i>
+        </div>
+        <div class="card-panel-description">
+            <div class="card-panel-text">New Books</div>
+            <count-to :start-val="0" :end-val="102400" :duration="2600" class="card-panel-num" />
+        </div>
+      </div>
+  </el-col>
+  <el-col :xs="12" :sm="12" :lg="6" class="card-panel-col">
+      <div class="card-panel">
+        <div class="card-panel-icon icon-people">
+          <i class="el-icon-s-management panel-icon"></i>
+        </div>
+        <div class="card-panel-description">
+            <div class="card-panel-text">New Books</div>
+            <count-to :start-val="0" :end-val="102400" :duration="2600" class="card-panel-num" />
+        </div>
+      </div>
+  </el-col>
+  <el-col :xs="12" :sm="12" :lg="6" class="card-panel-col">
+      <div class="card-panel">
+        <div class="card-panel-icon icon-people">
+          <i class="el-icon-s-management panel-icon"></i>
+        </div>
+        <div class="card-panel-description">
+            <div class="card-panel-text">New Books</div>
+            <count-to :start-val="0" :end-val="102400" :duration="2600" class="card-panel-num" />
+        </div>
+      </div>
+  </el-col>
 </el-row>
 <div class="big_box">
   <div class="left_box">
@@ -60,6 +106,7 @@
 <script>
 import lineechart from '../../components/echarts/line'
 import rotation from '../../components/echarts/Rotation'
+import CountTo from 'vue-count-to'
 export default {
   name: 'HomeIndex',
   data () {
@@ -68,7 +115,8 @@ export default {
   },
   components: {
     lineechart,
-    rotation
+    rotation,
+    CountTo
   },
   computed: {},
   created () {},
@@ -81,12 +129,57 @@ export default {
 </script>
 <style lang='scss' scoped>
 // @import './test.scss';
-.el-row {
-    margin-bottom: 20px;
-    &:last-child {
-      margin-bottom: 0;
+.panel-group{
+  margin-top: 20px;
+  .card-panel-col{
+    margin-bottom: 32px;
+  }
+  .card-panel{
+    cursor: pointer;
+    height: 108px;
+    font-size: 12px;
+    background: #fff;
+    .panel-icon{
+      margin: 14px 0 0 14px;
+      padding: 11px;
+      color: rgb(64,201,198);
+      float: left;
+      font-size: 55px;
+    }
+    .card-panel-description{
+      float: right;
+      font-weight: bold;
+      margin: 26px;
+      margin-left: 0px;
+      .card-panel-text{
+        line-height: 18px;
+        color: rgba(0, 0, 0, 0.45);
+        font-size: 16px;
+        margin-bottom: 12px;
+      }
+      .card-panel-num {
+        font-size: 20px;
+      }
     }
   }
+}
+@media (max-width:550px) {
+   .card-panel-description {
+    display: none;
+  }
+  .card-panel-icon {
+    float: none !important;
+    width: 100%;
+    height: 100%;
+    margin: 0 !important;
+
+    .panel-icon {
+      display: block;
+      margin: 14px auto !important;
+      float: none !important;
+    }
+  }
+}
   .el-col {
     border-radius: 4px;
   }
@@ -99,9 +192,9 @@ export default {
   .bg-purple-light {
     background: #e5e9f2;
   }
-  .row-bg {
-    // padding: 10px 0;
-    background-color: #f9fafc;
+  .grid-content {
+    border-radius: 4px;
+    min-height: 36px;
   }
   .container{
     overflow: hidden;
@@ -119,6 +212,7 @@ export default {
     height: 150px;
   }
   .big_box{
+    box-shadow: 0 0 5px #9f9191;
     margin-top: 40px;
     margin-left: 40px;
     margin-right:40px;
@@ -156,6 +250,7 @@ export default {
     margin-right: 25px;
   }
   .left_box{
+    // box-shadow: 0 0 5px black;
     float: left;
     width: 65%;
     height: 100%;

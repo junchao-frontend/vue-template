@@ -62,7 +62,7 @@ const routes = [
     path: '/dataCenter',
     name: 'dataCenter',
     component: Layout,
-    redirect: '/dataCenter/echart',
+    redirect: '/echart',
     meta: {
       icon: 'el-icon-s-data',
       title: '数据中心'
@@ -249,6 +249,7 @@ router.beforeEach((to, from, next) => {
   } else {
     if (!logintoken) { // 如果没有token 则要去登录界面
       next('/') // 如果这里路径写 /login  则不需要上面根路径的重定向
+      NProgress.done()
     } else {
       // console.log(logintoken)
       // 有token的情况则要判断要访问的路由是否在权限之内
