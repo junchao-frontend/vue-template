@@ -1,18 +1,23 @@
 <template>
   <div class="container">
+    <el-checkbox-group class="checkbox" v-model="checkedTableColumns">
+    <el-checkbox v-for="i in table_config.thead" :key="i.prop" :label="i.label">
+      {{i.label}}
+    </el-checkbox>
+  </el-checkbox-group>
     <el-table
         :data="table_config.table_data"
         border
         stripe
         style="width: 100%">
         <el-table-column type="index" width="80" label="序号"></el-table-column>
-        <template v-for="item in this.table_config.thead">
-        <el-table-column v-if="item.type === 'button'" :key="item.prop" :prop="item.prop" :label="item.label">
+        <template v-for="item in Dynamicheader">
+        <!-- <el-table-column v-if="item.type === 'button'" :key="item.prop" :prop="item.prop" :label="item.label">
             <template slot-scope="scope">
             <el-button size="mini" :type="scope.row.state == '启用' ? 'success' : 'danger'">{{scope.row.state}}</el-button>
             </template>
-        </el-table-column>
-        <el-table-column v-else :key="item.prop" :prop="item.prop" :label="item.label"></el-table-column>
+        </el-table-column> -->
+        <el-table-column  :key="item.prop" :prop="item.prop" :label="item.label"></el-table-column>
         </template>
         <el-table-column label="操作">
         <template slot-scope="scope">
@@ -40,110 +45,53 @@
 </template>
 
 <script>
-// import { gettableData } from '@/api/user.js'
 export default {
   components: {},
   props: {
-    config: {
+    table_config: {
       type: Object,
       default: () => {}
     }
   },
   data () {
     return {
-      table_config: {
-        thead: [],
-        table_data: [
-          {
-            loginName: '王军潮',
-            power: 'api管理,角色管理',
-            creatTime: '2021/10/15',
-            manager: '代理商1',
-            state: '启用'
-          },
-          {
-            loginName: '于森',
-            power: 'api管理,账号管理',
-            creatTime: '2021/10/16',
-            manager: '代理商2',
-            state: '禁用'
-          },
-          {
-            loginName: '石平',
-            power: 'api管理,角色管理',
-            creatTime: '2021/10/17',
-            manager: '代理商3',
-            state: '启用'
-          },
-          {
-            loginName: '刘沛申',
-            power: 'api管理,权限管理',
-            creatTime: '2021/10/18',
-            manager: '代理商4',
-            state: '禁用'
-          },
-          {
-            loginName: '周浩露',
-            power: '账号管理,权限管理',
-            creatTime: '2021/10/22',
-            manager: '代理商6',
-            state: '禁用'
-          },
-          {
-            loginName: '张蓝宁',
-            power: '角色管理,权限管理',
-            creatTime: '2021/10/20',
-            manager: '代理商7',
-            state: '启用'
-          },
-          {
-            loginName: '赵浩男',
-            power: '账号管理,权限管理',
-            creatTime: '2021/10/22',
-            manager: '代理商10',
-            state: '启用'
-          }
-        ],
-        url: ''
-      },
       per_page: 40,
       totalpage: 400,
       page: 1
     }
   },
   watch: {
-    config: {
-      immediate: true,
-      handler () {
-        this.initData()
+  },
+  computed: {
+    Dynamicheader () {
+      return this.table_config.thead.filter((item) => item.show)
+    },
+    checkedTableColumns: {
+      get () {
+        // 返回选中的列名
+        return this.Dynamicheader.map(column => column.label)
+      },
+      set (checked) {
+        // 设置表格列的显示与隐藏
+        // console.log(checked)
+        this.table_config.thead.forEach((column, index) => {
+          // console.log(coulumn)
+          // 如果选中，则设置列显示
+          if (checked.includes(column.label)) {
+            column.show = true
+          } else {
+            // 如果未选中，则设置列隐藏
+            column.show = false
+          }
+        })
       }
     }
   },
-  computed: {},
   created () {},
-  mounted () {},
+  mounted () {
+    // console.log(this.config)
+  },
   methods: {
-    initData () {
-      for (const key in this.config) {
-        if (Object.keys(this.table_config).includes(key)) {
-          this.table_config[key] = this.config[key]
-        }
-      }
-      // this.loadtableData()
-    },
-    // loadtableData () {
-    //   const requestData = {
-    //     url: this.table_config.url
-    //   }
-    //   gettableData(requestData).then(res => {
-    //     // console.log(res)
-    //     const resData = res.data.data
-    //     this.table_config.table_data = resData.tabledata
-    //     // this.totalpage = resData.pagedata.totalpage
-    //     // this.page = resData.pagedata.page
-    //     // this.per_page = resData.pagedata.per_page
-    //   })
-    // },
     handleSizeChange (val) {
       // console.log(`每页 ${val} 条`)
     },
@@ -155,4 +103,8 @@ export default {
 </script>
 
 <style scoped>
+.checkbox{
+  margin-bottom: 15px;
+  margin-left: 1px;
+}
 </style>

@@ -68,7 +68,7 @@
 
 <script>
 // import { allRole } from '../../router/rolesFront'
-import { login, registerUser } from '@/api/user'
+import { login } from '@/api/user'
 // import { mixin } from 'vue/types/umd'
 export default {
   // mixins: [drawMixin],
@@ -118,18 +118,18 @@ export default {
     //     })
     //   })
     // }
-    register (aa) {
-      console.log(aa)
-      registerUser(aa).then(res => {
-        // console.log(res)
-        this.dialogFormVisible = false
-      })
-    },
+    // register (aa) {
+    //   console.log(aa)
+    //   registerUser(aa).then(res => {
+    //     // console.log(res)
+    //     this.dialogFormVisible = false
+    //   })
+    // },
     onSubmit (a) {
       login(a).then(res => {
-        // console.log(res)
-        if (res.data.code === 1000) {
-          const userInfo = res.data.data
+        if (res.data.code === 200) {
+          const userInfo = res.data.res
+          // console.log(userInfo)
           const token = userInfo.token
           const roles = userInfo.role
           const name = userInfo.name

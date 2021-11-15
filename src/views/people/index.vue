@@ -12,36 +12,16 @@
   </el-form-item>
   <el-form-item>
     <el-button @click="quit">退出</el-button>
-    <!-- <xx-button :buttons="this.buttons"></xx-button> -->
   </el-form-item>
-  <!-- <el-button v-permission = "{role:['admin']}">管理员能看见</el-button>
-    <el-button v-permission = "{role:['student']}">学生能看见</el-button>
-    <el-button v-permission = "{role:['admin', 'student']}">都能看见</el-button>
-    <el-button v-disabled = "{effect:'disabled'}">禁用按钮</el-button> -->
 </el-form>
   </div>
 </template>
 
 <script>
 import { mapGetters } from 'vuex'
-// import XxButton from '../../components/XxButton.vue'
-// import { drawMixin } from '../../utils/testMixin'
 export default {
-  // mixins: [drawMixin],
   data () {
     return {
-      buttons: [
-        {
-          label: '创建',
-          icon: 'el-icon-circle-plus-outline',
-          click: this.add
-        },
-        {
-          label: '修改',
-          icon: 'el-icon-edit-outline',
-          click: this.update
-        }
-      ]
     }
   },
   // components: { XxButton },

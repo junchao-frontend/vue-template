@@ -8,7 +8,7 @@ import NProgress from 'nprogress' // 引入进度条
 import 'nprogress/nprogress.css'
 import test1 from '../views/dataCenter/echart'
 import test3 from '../views/dataCenter/table'
-import test4 from '../views/dataCenter/api'
+import test4 from '../views/dataCenter/form'
 import test5 from '../views/people'
 import test6 from '../views/rolebutton'
 Vue.use(VueRouter)
@@ -81,26 +81,16 @@ const routes = [
         name: 'table',
         component: test3,
         meta: {
-          title: '表单组件'
+          title: '动态表格'
         }
       },
       {
-        path: '/api',
-        name: 'api',
+        path: '/form',
+        name: 'form',
         component: test4,
         meta: {
-          title: 'api组件'
-        },
-        children: [
-          {
-            path: '/apiManage',
-            name: 'apiManage',
-            meta: {
-              title: 'api管理'
-            },
-            component: () => import('../views/apiManage')
-          }
-        ]
+          title: '动态表单'
+        }
       }
     ]
   },
@@ -272,13 +262,14 @@ router.beforeEach((to, from, next) => {
         }
         login(loginData).then(res => {
         // console.log(loginData, '---')
-          const userInfo = res.data.data
+          const userInfo = res.data.res
           // 把角色的数据存入vuex
           // console.log('123')
           store.commit('SET_ROLE', userInfo.role)
           store.commit('SET_NAME', userInfo.name)
           store.commit('SET_PHOTO', userInfo.photo)
         })
+        NProgress.done()
       } else { // 如果没在权限之内 去404
         next('/404')
       }

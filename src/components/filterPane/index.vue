@@ -1,6 +1,6 @@
 <template>
   <div class="container">
-    <el-date-picker
+    <!-- <el-date-picker
       v-if="filterData.timeSelect"
       v-model="dateRange"
       style="width: 300px"
@@ -10,7 +10,7 @@
       end-placeholder="结束日期"
       :picker-options="pickerOptions"
       class="filter-item"
-    />
+    /> -->
     <template v-if="filterData.elinput">
       <el-input
         class="filter-item"
