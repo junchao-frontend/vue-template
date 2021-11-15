@@ -100,17 +100,66 @@
     <rotation></rotation>
   </div>
 </div>
+<div class="big_box">
+  <div class="left_box">
+    <rotation></rotation>
+  </div>
+  <div class="right_box">
+    <rotation></rotation>
+  </div>
+</div>
+  <el-drawer
+  :with-header="false"
+  :size='size'
+  :show-close='false'
+  wrapperClosable
+  :visible.sync="drawer"
+  close-on-press-escape
+  :modal-append-to-body='false'
+  :before-close="handleClose">
+  <div class="person-info">
+  <el-form ref="form" label-width="80px">
+  <el-form-item label="头像:">
+    <img :src="GET_PHOTO" style="width:80px;height:80px;border-radius: 20%">
+  </el-form-item>
+  <el-form-item label="手机号:">
+    <span>{{15533570808}}</span>
+  </el-form-item>
+  <el-form-item label="姓名:">
+    <span>{{'王军潮'}}</span>
+  </el-form-item>
+  <el-form-item label="邮箱:">
+    <span>{{'1109355524@qq.com'}}</span>
+  </el-form-item>
+  <el-form-item label="权限:">
+    <span>{{GET_NAME}}</span>
+  </el-form-item>
+  <el-form-item label="角色:">
+    <span>{{GET_ROLE}}</span>
+  </el-form-item>
+  <el-form-item>
+    <el-button @click="quit">用户退出</el-button>
+  </el-form-item>
+</el-form>
+</div>
+</el-drawer>
+<div @click="openDrawer" class="theme-icon" :style="{right: themeSize+ 'px'}">
+  <i :class="drawer ? 'el-icon-close' : 'el-icon-s-custom'"></i>
+</div>
 </div>
 </template>
-
 <script>
 import lineechart from '../../components/echarts/line'
 import rotation from '../../components/echarts/Rotation'
 import CountTo from 'vue-count-to'
+import { mapGetters } from 'vuex'
 export default {
   name: 'HomeIndex',
   data () {
     return {
+      drawer: false,
+      size: '14%',
+      themeSize: '14'
     }
   },
   components: {
@@ -118,12 +167,28 @@ export default {
     rotation,
     CountTo
   },
-  computed: {},
+  computed: {
+    ...mapGetters(['GET_NAME', 'GET_ROLE', 'GET_PHOTO'])
+  },
   created () {},
   mounted () {
   },
   destroyed () {},
   methods: {
+    handleClose (done) {
+      done()
+      this.themeSize = '14'
+    },
+    openDrawer (e) {
+      // console.log(e.target.className)
+      if (e.target.className === 'el-icon-s-custom') {
+        this.drawer = true
+        this.themeSize = '245'
+      } else {
+        this.drawer = false
+        this.themeSize = '14'
+      }
+    }
   }
 }
 </script>
@@ -200,6 +265,32 @@ export default {
     overflow: hidden;
     flex-direction: column;
     display: flex;
+    .person-info{
+      /deep/ .el-form-item{
+        // font-size: 50px;
+        color: rgb(0, 0, 0);
+        margin-top: 60px;
+      }
+      margin: 50px auto;
+    }
+    .theme-icon{
+      transition: right 0.25s cubic-bezier(0.4, 0.49, 0.45, 0.99);
+      z-index: 3000;
+      cursor: pointer;
+      font-size: 25px;
+      width: 48px;
+      height: 48px;
+      background-color: rgb(24, 144, 255);
+      border-radius: 6px 0 0 6px!important;
+      position: fixed;
+      top: 35%;
+      color: #fff;
+      text-align: center;
+      line-height: 49px;
+    }
+    /deep/ .el-drawer{
+      overflow: unset;
+    }
   }
   .grid-content{
     align-items: center;
