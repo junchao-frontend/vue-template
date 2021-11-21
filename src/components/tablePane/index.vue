@@ -9,22 +9,26 @@
         :data="table_config.table_data"
         border
         stripe
-        style="width: 100%">
-        <el-table-column type="index" width="80" label="序号"></el-table-column>
+        style="width: 100%;background:#e9eef3">
+        <el-table-column type="index" width="150" label="序号"></el-table-column>
         <template v-for="item in Dynamicheader">
         <!-- <el-table-column v-if="item.type === 'button'" :key="item.prop" :prop="item.prop" :label="item.label">
             <template slot-scope="scope">
             <el-button size="mini" :type="scope.row.state == '启用' ? 'success' : 'danger'">{{scope.row.state}}</el-button>
             </template>
         </el-table-column> -->
-        <el-table-column  :key="item.prop" :prop="item.prop" :label="item.label"></el-table-column>
+        <el-table-column width="220" :key="item.prop" :prop="item.prop" :label="item.label"></el-table-column>
         </template>
-        <el-table-column label="操作">
+        <el-table-column width="220" label="操作">
         <template slot-scope="scope">
         <el-button
           size="mini"
           type="primary"
           @click="handleEdit(scope.$index, scope.row)">编辑</el-button>
+          <el-button
+          size="mini"
+          type="success"
+          >查看</el-button>
         <el-button
           size="mini"
           type="danger"

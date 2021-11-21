@@ -9,7 +9,8 @@ import 'nprogress/nprogress.css'
 import test1 from '../views/dataCenter/echart'
 import test3 from '../views/dataCenter/table'
 import test4 from '../views/dataCenter/form'
-import test5 from '../views/people'
+import test5 from '../views/mark/editmark'
+import test7 from '../views/mark/showmark'
 import test6 from '../views/rolebutton'
 Vue.use(VueRouter)
 // vue-router路由版本更新产生的问题,导致路由跳转失败抛出该错误，但并不影响程序功能
@@ -65,7 +66,7 @@ const routes = [
     redirect: '/echart',
     meta: {
       icon: 'el-icon-s-data',
-      title: '数据中心'
+      title: '基本组件'
     },
     children: [
       {
@@ -95,19 +96,30 @@ const routes = [
     ]
   },
   {
-    path: '/powerF',
-    name: 'powerF',
+    path: '/markF',
+    name: 'markF',
     component: Layout,
-    redirect: '/power',
+    redirect: '/editmark',
     meta: {
-      icon: 'el-icon-s-tools',
-      title: '权限页面'
+      icon: 'el-icon-menu',
+      title: 'Markdown'
     },
     children: [
       {
-        path: '/power',
-        name: 'power',
-        component: () => import('@/views/power')
+        path: '/editmark',
+        name: 'editmark',
+        component: test5,
+        meta: {
+          title: '编辑Markdown'
+        }
+      },
+      {
+        path: '/showmark',
+        name: 'showmark',
+        component: test7,
+        meta: {
+          title: '展示Markdown'
+        }
       }
     ]
   },
@@ -168,19 +180,19 @@ const routes = [
     ]
   },
   {
-    path: '/peopleF',
-    name: 'peopleF',
+    path: '/powerF',
+    name: 'powerF',
     component: Layout,
-    redirect: '/people',
+    redirect: '/power',
     meta: {
-      icon: 'el-icon-s-custom',
-      title: '个人中心'
+      icon: 'el-icon-s-tools',
+      title: '权限页面'
     },
     children: [
       {
-        path: '/people',
-        name: 'people',
-        component: test5
+        path: '/power',
+        name: 'power',
+        component: () => import('@/views/power')
       }
     ]
   },

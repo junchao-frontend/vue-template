@@ -3,19 +3,28 @@
     <!-- <div class="date_container">
     <filterPane :filterData='filterData' />
     </div> -->
+    <el-button @click="addData">增加</el-button>
+    <el-button @click="test1">--</el-button>
     <div class="table_container">
     <tablePane :table_config='table_config' />
     </div>
   </div>
 </template>
-
 <script>
 // import filterPane from '@/components/filterPane/index.vue'
 import tablePane from '@/components/tablePane/index.vue'
+import { addTabeldata, showTabeldata } from '../../../api/tabel'
+console.log('--')
 export default {
   data () {
     return {
       checkList: [],
+      test: {
+        loginName: 'taest',
+        power: '21a3',
+        creatTime: '3a3',
+        manager: '413'
+      },
       filterData: {
         timeSelect: true,
         inputData: '',
@@ -56,29 +65,7 @@ export default {
             label: '管理员', prop: 'manager', show: true
           }
         ],
-        table_data: [
-          {
-            loginName: '王军潮',
-            power: 'api管理,角色管理',
-            creatTime: '2021/10/15',
-            manager: '代理商1',
-            state: '启用'
-          },
-          {
-            loginName: '于森',
-            power: 'api管理,账号管理',
-            creatTime: '2021/10/16',
-            manager: '代理商2',
-            state: '禁用'
-          },
-          {
-            loginName: '陈阳',
-            power: 'api管理,角色管理',
-            creatTime: '2021/10/17',
-            manager: '代理商3',
-            state: '启用'
-          }
-        ],
+        table_data: [],
         url: '/tabledata'
       }
     }
@@ -89,9 +76,30 @@ export default {
   },
   computed: {},
   created () {},
-  mounted () {},
+  mounted () {
+    this.initData()
+  },
   destroyed () {},
-  methods: {}
+  methods: {
+    addData () {
+      addTabeldata(this.test).then(res => {
+        // console.log(res)
+        this.initData()
+      })
+    },
+    initData () {
+      showTabeldata().then(res => {
+        // console.log(res)
+        this.table_config.table_data = res.data
+      })
+    },
+    test1 () {
+      var a = () => {
+        console.log(this)
+      }
+      a()
+    }
+  }
 }
 </script>
 <style scoped>
@@ -100,6 +108,7 @@ export default {
   margin-top: 30px;
 }
 .table_container{
+  background-color: #e9eef3;
   margin-left: 23px;
   margin-top: 30px;
 }

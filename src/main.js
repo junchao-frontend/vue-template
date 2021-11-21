@@ -11,6 +11,9 @@ import './assets/scss/index.scss'// 全局样式
 import './components/index'
 import * as echarts from 'echarts'// 全局引入echarts 新版引入方式
 import dataV from '@jiaminghi/data-view'// 全局dataV组件
+import mavonEditor from 'mavon-editor'
+import 'mavon-editor/dist/css/index.css' // 引入markdown
+Vue.use(mavonEditor)
 Vue.config.productionTip = false
 Vue.prototype.$axios = axios
 Vue.prototype.$echarts = echarts

@@ -69,7 +69,6 @@
 <script>
 // import { allRole } from '../../router/rolesFront'
 import { login } from '@/api/user'
-// import { mixin } from 'vue/types/umd'
 export default {
   // mixins: [drawMixin],
   data () {
@@ -127,6 +126,7 @@ export default {
     // },
     onSubmit (a) {
       login(a).then(res => {
+        // console.log(res)
         if (res.data.code === 200) {
           const userInfo = res.data.res
           // console.log(userInfo)
@@ -162,6 +162,24 @@ export default {
   width: 900px;
   height: 1000px;
 }
+>>>.el-input__inner {
+    margin-top: 6px;
+    -webkit-appearance: none;
+    background-color: #FFF;
+    background-image: none;
+    border-radius: 4px;
+    border: 1px solid #DCDFE6;
+    box-sizing: border-box;
+    color: #606266;
+    display: inline-block;
+    font-size: inherit;
+    height: 32px;
+    line-height: 40px;
+    outline: 0;
+    padding: 0 15px;
+    transition: border-color .2s cubic-bezier(.645,.045,.355,1);
+    width: 100%;
+}
 .login-container{
   position: relative;
   width: 100vw;
@@ -169,6 +187,24 @@ export default {
   background-color: rgb(245, 246, 250);
   display: flex;
   align-items: center;
+}
+ >>> .el-input__inner {
+    margin-top: 6px;
+    -webkit-appearance: none;
+    background-color: #FFF;
+    background-image: none;
+    border-radius: 4px;
+    border: 1px solid #DCDFE6;
+    box-sizing: border-box;
+    color: #606266;
+    display: inline-block;
+    font-size: inherit;
+    height: 32px;
+    line-height: 40px;
+    outline: 0;
+    padding: 0 15px;
+    transition: border-color .2s cubic-bezier(.645,.045,.355,1);
+    width: 100%;
 }
 .login-container::before{
         content: "";  /*:before和:after必带技能，重要性为满5颗星*/
@@ -232,24 +268,7 @@ export default {
   height: 320px;
   background-color: rgba(255, 255, 255);
 }
->>>.el-input__inner {
-    margin-top: 6px;
-    -webkit-appearance: none;
-    background-color: #FFF;
-    background-image: none;
-    border-radius: 4px;
-    border: 1px solid #DCDFE6;
-    box-sizing: border-box;
-    color: #606266;
-    display: inline-block;
-    font-size: inherit;
-    height: 32px;
-    line-height: 40px;
-    outline: 0;
-    padding: 0 15px;
-    transition: border-color .2s cubic-bezier(.645,.045,.355,1);
-    width: 100%;
-}
+
 .el-button--danger {
     margin-top: 18px;
     line-height: 10px;

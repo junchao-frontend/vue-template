@@ -179,6 +179,11 @@ export default {
       done()
       this.themeSize = '14'
     },
+    quit () {
+      this.$router.push('/login')
+      sessionStorage.clear() // 清空sessionstorage里面的所有数据
+      window.location.reload() // 刷新vuex
+    },
     openDrawer (e) {
       // console.log(e.target.className)
       if (e.target.className === 'el-icon-s-custom') {
