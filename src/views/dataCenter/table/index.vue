@@ -1,30 +1,16 @@
 <template>
   <div class="container">
-    <!-- <div class="date_container">
-    <filterPane :filterData='filterData' />
-    </div> -->
-    <el-button @click="addData">增加</el-button>
-    <el-button @click="test1">--</el-button>
     <div class="table_container">
     <tablePane :table_config='table_config' />
     </div>
   </div>
 </template>
 <script>
-// import filterPane from '@/components/filterPane/index.vue'
 import tablePane from '@/components/tablePane/index.vue'
-import { addTabeldata, showTabeldata } from '../../../api/tabel'
-console.log('--')
 export default {
   data () {
     return {
       checkList: [],
-      test: {
-        loginName: 'taest',
-        power: '21a3',
-        creatTime: '3a3',
-        manager: '413'
-      },
       filterData: {
         timeSelect: true,
         inputData: '',
@@ -53,20 +39,23 @@ export default {
       table_config: {
         thead: [
           {
-            label: '登录账号', prop: 'loginName', show: true
+            label: '姓名', prop: 'name', show: true
           },
           {
-            label: '权限', prop: 'power', show: true
+            label: '邮箱', prop: 'email', show: true
           },
           {
-            label: '激活时间', prop: 'creatTime', show: true
+            label: '地址', prop: 'addr', show: true
           },
           {
-            label: '管理员', prop: 'manager', show: true
+            label: '年龄', prop: 'age', show: true
+          },
+          {
+            label: '生日', prop: 'birth', show: true
           }
-        ],
-        table_data: [],
-        url: '/tabledata'
+        ], // 表单表头数据
+        table_data: [], // 表单数据
+        url: '/user/showdata' // 获取表单数据URL
       }
     }
   },
@@ -77,28 +66,9 @@ export default {
   computed: {},
   created () {},
   mounted () {
-    this.initData()
   },
   destroyed () {},
   methods: {
-    addData () {
-      addTabeldata(this.test).then(res => {
-        // console.log(res)
-        this.initData()
-      })
-    },
-    initData () {
-      showTabeldata().then(res => {
-        // console.log(res)
-        this.table_config.table_data = res.data
-      })
-    },
-    test1 () {
-      var a = () => {
-        console.log(this)
-      }
-      a()
-    }
   }
 }
 </script>

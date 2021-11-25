@@ -1,12 +1,9 @@
 import axios from 'axios'
-// import { startLoading, endLoading } from './loading'
-// import { Loading } from 'element-ui'
-// import { config } from '_vue@2.6.14@vue/types/umd'
 const request = axios.create({
   // baseURL: 'http://152.136.115.31:7008', // 董文达服务器
-  baseURL: 'http://lxandzjy.top:9998', // 朱
+  // baseURL: 'http://lxandzjy.top:9998', // 朱
   // baseURL: 'http://127.0.0.1:7001', // 自己
-  timeout: 50000
+  timeout: 5000
 })
 
 request.interceptors.request.use(config => {

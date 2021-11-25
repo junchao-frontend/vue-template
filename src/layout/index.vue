@@ -66,7 +66,7 @@ export default {
   computed: {
     ...mapGetters(['GET_NAME', 'GET_PHOTO'])
   },
-  created () { },
+  created () {},
   mounted () {
     // this.getTimes()
     const that = this
@@ -132,6 +132,7 @@ export default {
   left: 0;
 }
 .aside {
+  width: 100%;
   background-color: #0E1629;
   color: #333;
 }

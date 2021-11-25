@@ -5,7 +5,7 @@ import store from './store'
 import ElementUI from 'element-ui'
 import 'element-ui/lib/theme-chalk/index.css' // 全局引入element ui
 import axios from 'axios'
-// import './mock/api.js' 之前用mock模拟的接口
+import './mock/index.js' // mock模拟的接口
 import '@/utils/permission.js' // 全局引入自定义权限指令
 import './assets/scss/index.scss'// 全局样式
 import './components/index'

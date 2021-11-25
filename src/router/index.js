@@ -1,17 +1,11 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
 import Layout from '@/layout/index'
-import { login } from '../api/user'
+import { login } from '../api/login'
 import store from '../store'
 import { allRole } from '@/router/rolesFront.js'// 导入角色对应的路由
 import NProgress from 'nprogress' // 引入进度条
 import 'nprogress/nprogress.css'
-import test1 from '../views/dataCenter/echart'
-import test3 from '../views/dataCenter/table'
-import test4 from '../views/dataCenter/form'
-import test5 from '../views/mark/editmark'
-import test7 from '../views/mark/showmark'
-import test6 from '../views/rolebutton'
 Vue.use(VueRouter)
 // vue-router路由版本更新产生的问题,导致路由跳转失败抛出该错误，但并不影响程序功能
 const originalPush = VueRouter.prototype.push
@@ -72,7 +66,7 @@ const routes = [
       {
         path: '/echart',
         name: 'echart',
-        component: test1,
+        component: () => import('../views/dataCenter/echart'),
         meta: {
           title: '可视化组件'
         }
@@ -80,7 +74,7 @@ const routes = [
       {
         path: '/table',
         name: 'table',
-        component: test3,
+        component: () => import('../views/dataCenter/table'),
         meta: {
           title: '动态表格'
         }
@@ -88,7 +82,7 @@ const routes = [
       {
         path: '/form',
         name: 'form',
-        component: test4,
+        component: () => import('../views/dataCenter/form'),
         meta: {
           title: '动态表单'
         }
@@ -108,7 +102,7 @@ const routes = [
       {
         path: '/editmark',
         name: 'editmark',
-        component: test5,
+        component: () => import('../views/mark/editmark'),
         meta: {
           title: '编辑Markdown'
         }
@@ -116,7 +110,7 @@ const routes = [
       {
         path: '/showmark',
         name: 'showmark',
-        component: test7,
+        component: () => import('../views/mark/showmark'),
         meta: {
           title: '展示Markdown'
         }
@@ -136,7 +130,7 @@ const routes = [
       {
         path: '/rolebutton',
         name: 'rolebutton',
-        component: test6
+        component: () => import('../views/rolebutton')
       }
     ]
   },
@@ -274,7 +268,7 @@ router.beforeEach((to, from, next) => {
         }
         login(loginData).then(res => {
         // console.log(loginData, '---')
-          const userInfo = res.data.res
+          const userInfo = res.data
           // 把角色的数据存入vuex
           // console.log('123')
           store.commit('SET_ROLE', userInfo.role)

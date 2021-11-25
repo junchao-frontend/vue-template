@@ -68,7 +68,7 @@
 
 <script>
 // import { allRole } from '../../router/rolesFront'
-import { login } from '@/api/user'
+import { login } from '@/api/login'
 export default {
   // mixins: [drawMixin],
   data () {
@@ -97,54 +97,22 @@ export default {
   },
   destroyed () {},
   methods: {
-    // onSubmit (form) {
-    //   login(form).then(async res => {
-    //     console.log(res)
-    //     const token = res.data.token
-    //     // 通过token调取获取角色数据的接口  之后把数据存入缓存
-    //     await findUserByToken(token).then(res2 => {
-    //       const userInfo = res2.data
-    //       sessionStorage.setItem('role', userInfo.role)
-    //       // console.log('sss')
-    //       // console.log(res2, 'res2')
-    //     })
-    //     // console.log('bbb')
-    //     sessionStorage.setItem('token', token) // 存入token
-    //     this.$store.commit('SET_TOKEN', token)
-    //     // var aaa = sessionStorage.getItem('tt', token)
-    //     this.$router.push({
-    //       path: '/home'
-    //     })
-    //   })
-    // }
-    // register (aa) {
-    //   console.log(aa)
-    //   registerUser(aa).then(res => {
-    //     // console.log(res)
-    //     this.dialogFormVisible = false
-    //   })
-    // },
     onSubmit (a) {
       login(a).then(res => {
-        // console.log(res)
-        if (res.data.code === 200) {
-          const userInfo = res.data.res
-          // console.log(userInfo)
-          const token = userInfo.token
-          const roles = userInfo.role
-          const name = userInfo.name
-          const photo = userInfo.photo
-          sessionStorage.setItem('token', token)
-          sessionStorage.setItem('roles', roles)
-          // console.log(typeof roles)
-          this.$store.commit('SET_NAME', name)
-          this.$store.commit('SET_ROLE', roles)
-          this.$store.commit('SET_PHOTO', photo)
-          this.$store.commit('SET_TOKEN', token)
-          this.$router.push('/home')
-        } else {
-          alert('抱歉,您输入的账号密码不存在,请重新输入')
-        }
+        console.log(res)
+        const userInfo = res.data
+        const token = userInfo.token
+        const roles = userInfo.role
+        const name = userInfo.name
+        const photo = userInfo.photo
+        sessionStorage.setItem('token', token)
+        sessionStorage.setItem('roles', roles)
+        // console.log(typeof roles)
+        this.$store.commit('SET_NAME', name)
+        this.$store.commit('SET_ROLE', roles)
+        this.$store.commit('SET_PHOTO', photo)
+        this.$store.commit('SET_TOKEN', token)
+        this.$router.push('/home')
       })
       // console.log('外部函数')
     }
