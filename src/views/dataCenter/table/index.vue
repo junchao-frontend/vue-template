@@ -10,32 +10,6 @@ import tablePane from '@/components/tablePane/index.vue'
 export default {
   data () {
     return {
-      checkList: [],
-      filterData: {
-        timeSelect: true,
-        inputData: '',
-        selectData: '',
-        elinput: [
-          {
-            name: '姓名'
-          }
-        ],
-        elselect: [
-          {
-            name: '部门',
-            option: [
-              {
-                key: 0,
-                value: '技术部'
-              },
-              {
-                key: 1,
-                value: '督查部'
-              }
-            ]
-          }
-        ]
-      },
       table_config: {
         thead: [
           {
@@ -73,14 +47,8 @@ export default {
 }
 </script>
 <style scoped>
-.date_container{
-  margin-left: 12px;
-  margin-top: 30px;
+.container{
+  padding: 2px;
+  background: white;
 }
-.table_container{
-  background-color: #e9eef3;
-  margin-left: 23px;
-  margin-top: 30px;
-}
-
 </style>
