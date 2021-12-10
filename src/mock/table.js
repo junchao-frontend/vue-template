@@ -3,7 +3,7 @@ import { getQueryParameters } from '../utils/getUrl'
 import Mock from 'mockjs'
 
 var List = [] // 定义表格数据
-const count = 50
+const count = 60
 /**
  *通过for循环 模拟count条随机数据
  */

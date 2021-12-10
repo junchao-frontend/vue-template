@@ -41,11 +41,3 @@ export const deleteUser = (params) => {
     params
   })
 }
-// 重置表单数据
-export const resetUser = (params) => {
-  return request({
-    method: 'GET',
-    url: '/user/reset',
-    params
-  })
-}

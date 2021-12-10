@@ -14,7 +14,6 @@ Mock.mock(/\/user\/add/, 'get', tableApi.createUser)
 Mock.mock(/\/user\/search/, 'get', tableApi.searchUser)
 Mock.mock(/\/user\/delete/, 'get', tableApi.deleteUser)
 Mock.mock(/\/user\/update/, 'get', tableApi.updateUser)
-Mock.mock(/\/user\/reset/, 'get', tableApi.resetUser)
 
 // 登录相关
 Mock.mock(/\/user\/login/, 'get', loginApi.login)

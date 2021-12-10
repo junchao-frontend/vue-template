@@ -1,36 +1,33 @@
 <template>
   <div class="container">
     <div class="editbox">
-      <el-input v-model="searchName" placeholder="名字"></el-input>
-      <el-button type="primary" icon="el-icon-search" size="small" @click="search(searchName)">搜索</el-button>
-      <el-button type="primary" icon="el-icon-edit" size="small" @click="addFormVisible = true">添加</el-button>
-      <el-button type="primary" icon="el-icon-refresh" size="small" @click="react()">重置</el-button>
-    </div>
-    <el-checkbox-group class="checkbox" v-model="checkedTableColumns">
-    <el-checkbox v-for="i in table_config.thead" :key="i.prop" :label="i.label">
+      <el-input style="marginRight:20px;width: 13%" v-model="searchName" placeholder="名字"></el-input>
+      <el-button style="marginRight:20px" type="primary" icon="el-icon-search" size="small" @click="search(searchName)">搜索</el-button>
+      <el-button style="marginRight:20px" type="primary" icon="el-icon-edit" size="small" @click="addFormVisible = true">添加</el-button>
+      <el-button style="marginRight:20px" type="primary" icon="el-icon-refresh" size="small" @click="react()">重置</el-button>
+      <el-checkbox-group class="checkbox" v-model="checkedTableColumns">
+      <el-checkbox v-for="i in table_config.thead" :key="i.prop" :label="i.label">
       {{i.label}}
-    </el-checkbox>
-  </el-checkbox-group>
+       </el-checkbox>
+      </el-checkbox-group>
+    </div>
   <div class="table-box">
     <el-table
-        :header-cell-style="{color:'#333',fontFamily:'MicrosoftYaHeiUI',fontSize:'14px',fontWeight:900,backgroundColor:'#f6f5ec'}"
-        :row-style="{fontSize:'12px',color:'#666',fontFamily:'MicrosoftYaHeiUI'}"
-        center
+        :header-cell-style="{color:'black',fontFamily:'MicrosoftYaHeiUI',fontSize:'14px',fontWeight:900,backgroundColor:'#f0f5fa'}"
         v-loading="loading"
         :data="table_config.table_data"
-        border
         stripe
-        style="width: 100%;background:#e9eef3">
-        <el-table-column type="index" width="150" label="序号"></el-table-column>
+        style="width: 100%">
+        <el-table-column type="index" label="序号"></el-table-column>
         <template v-for="item in Dynamicheader">
         <!-- <el-table-column v-if="item.type === 'button'" :key="item.prop" :prop="item.prop" :label="item.label">
             <template slot-scope="scope">
             <el-button size="mini" :type="scope.row.state == '启用' ? 'success' : 'danger'">{{scope.row.state}}</el-button>
             </template>
         </el-table-column> -->
-        <el-table-column width="220" :key="item.prop" :prop="item.prop" :label="item.label"></el-table-column>
+        <el-table-column :key="item.prop" :prop="item.prop" :label="item.label"></el-table-column>
         </template>
-        <el-table-column width="200" label="操作">
+        <el-table-column  label="操作">
         <template slot-scope="scope">
         <el-button
           size="mini"
@@ -251,27 +248,42 @@ export default {
 
 <style lang="scss" scoped>
 .checkbox{
-  margin-bottom: 18px;
-  margin-left: 1px;
+  display: flex;
+  align-items: center;
+  // display: block;
+  // margin-bottom: 18px;
+  margin-left: 10px;
 }
 .editbox{
-  // display: flex;
-  margin-bottom: 25px;
-  .el-input{
-    margin-right: 20px;
-    width: 180px;
-    /deep/ .el-input__inner{
-      height: 32px;
-    }
-  }
+    padding: 2%;
+    margin: 2%;
+    background-color: #fff;
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-shadow: -1px 1px 5px #888;
+    box-shadow: -1px 1px 5px #888;
+  // .el-input{
+  //   margin-right: 20px;
+  //   width: 180px;
+  //   /deep/ .el-input__inner{
+  //     height: 32px;
+  //   }
+  // }
 }
 .table-box{
-/deep/ .el-table th > .cell {
-    text-align: center;
-}
-/deep/ .el-table .cell {
-    text-align: center;
-}
+    padding: 2%;
+    margin: 0 2%;
+    background-color: #fff;
+    -webkit-box-shadow: -1px 1px 5px #888;
+    box-shadow: -1px 1px 5px #888;
+//   box-shadow: 0 0 3px rgba(0,0,0,0.5);
+// /deep/ .el-table th > .cell {
+//     text-align: center;
+// }
+// /deep/ .el-table .cell {
+//     text-align: center;
+// }
 }
 .page{
   margin-top: 15px;

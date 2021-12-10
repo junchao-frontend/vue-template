@@ -64,14 +64,6 @@ const routes = [
     },
     children: [
       {
-        path: '/echart',
-        name: 'echart',
-        component: () => import('../views/dataCenter/echart'),
-        meta: {
-          title: '可视化组件'
-        }
-      },
-      {
         path: '/table',
         name: 'table',
         component: () => import('../views/dataCenter/table'),
@@ -130,7 +122,24 @@ const routes = [
       {
         path: '/rolebutton',
         name: 'rolebutton',
-        component: () => import('../views/rolebutton')
+        component: () => import('../views/rolebutton/')
+      }
+    ]
+  },
+  {
+    path: '/drawingbedF',
+    name: 'drawingbedF',
+    component: Layout,
+    redirect: '/drawingbed',
+    meta: {
+      icon: 'el-icon-picture',
+      title: '图床组件'
+    },
+    children: [
+      {
+        path: '/drawingbed',
+        name: 'drawingbed',
+        component: () => import('../views/drawingbed/')
       }
     ]
   },

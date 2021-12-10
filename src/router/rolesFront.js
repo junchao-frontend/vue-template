@@ -5,7 +5,7 @@
 
 const role0 = [
   'home', 'homeF',
-  'dataCenter', 'echart', 'table', 'form',
+  'dataCenter', 'table', 'form',
   'rolebutton', 'rolebuttonF',
   'mark', 'markF', 'editmark', 'showmark',
   '404'
@@ -13,9 +13,10 @@ const role0 = [
 
 const role1 = [
   'home', 'homeF',
-  'dataCenter', 'echart', 'table', 'form',
+  'dataCenter', 'table', 'form',
   'power', 'powerF', // 权限管理
   'rolebutton', 'rolebuttonF',
+  'drawingbedF', 'drawingbed',
   'routerTest', 'first', 'second', 'threemenu', // 动态路由
   'mark', 'markF', 'editmark', 'showmark',
   '404'
