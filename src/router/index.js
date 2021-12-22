@@ -35,12 +35,13 @@ const routes = [
   },
   {
     path: '/homeF',
-    name: 'homeF',
+    name: 'home',
     redirect: '/home',
     component: Layout,
     meta: {
       icon: 'el-icon-s-home',
-      title: 'Dashboard'
+      title: 'Dashboard',
+      path: '/home'
     },
     children: [
       {
@@ -49,7 +50,8 @@ const routes = [
         component: () => import('@/views/home'),
         meta: {
           title: '首页'
-        }
+        },
+        children: []
       }
     ]
   },
@@ -68,16 +70,20 @@ const routes = [
         name: 'table',
         component: () => import('../views/dataCenter/table'),
         meta: {
-          title: '动态表格'
-        }
+          title: '动态表格',
+          path: '/table'
+        },
+        children: []
       },
       {
         path: '/form',
         name: 'form',
         component: () => import('../views/dataCenter/form'),
         meta: {
-          title: '动态表单'
-        }
+          title: '动态表单',
+          path: '/form'
+        },
+        children: []
       }
     ]
   },
@@ -96,16 +102,20 @@ const routes = [
         name: 'editmark',
         component: () => import('../views/mark/editmark'),
         meta: {
-          title: '编辑Markdown'
-        }
+          title: '编辑Markdown',
+          path: '/editmark'
+        },
+        children: []
       },
       {
         path: '/showmark',
         name: 'showmark',
         component: () => import('../views/mark/showmark'),
         meta: {
-          title: '展示Markdown'
-        }
+          title: '展示Markdown',
+          path: '/showmark'
+        },
+        children: []
       }
     ]
   },
@@ -116,13 +126,18 @@ const routes = [
     redirect: '/rolebutton',
     meta: {
       icon: 'el-icon-mouse',
-      title: '指令按钮'
+      title: '指令按钮',
+      path: '/rolebutton'
     },
     children: [
       {
         path: '/rolebutton',
         name: 'rolebutton',
-        component: () => import('../views/rolebutton/')
+        component: () => import('../views/rolebutton/'),
+        meta: {
+          title: '指令按钮'
+        },
+        children: []
       }
     ]
   },
@@ -133,52 +148,18 @@ const routes = [
     redirect: '/drawingbed',
     meta: {
       icon: 'el-icon-picture',
-      title: '图床组件'
+      title: '图床组件',
+      path: '/drawingbed'
     },
     children: [
       {
         path: '/drawingbed',
         name: 'drawingbed',
-        component: () => import('../views/drawingbed/')
-      }
-    ]
-  },
-  {
-    path: '/routerTest',
-    name: 'routerTest',
-    component: Layout,
-    redirect: '/second',
-    meta: {
-      icon: 'el-icon-aim',
-      title: '动态路由'
-    },
-    children: [
-      {
-        path: '/first',
-        name: 'first',
-        redirect: '/threemenu',
+        component: () => import('../views/drawingbed/'),
         meta: {
-          title: '二级菜单1'
+          title: '图床组件'
         },
-        component: () => import('../views/routerTest/first'),
-        children: [
-          {
-            path: '/threemenu',
-            name: 'threemenu',
-            meta: {
-              title: '三级菜单'
-            },
-            component: () => import('../views/routerTest/threemenu')
-          }
-        ]
-      },
-      {
-        path: '/second',
-        name: 'second',
-        meta: {
-          title: '二级菜单2'
-        },
-        component: () => import('../views/routerTest/second')
+        children: []
       }
     ]
   },
@@ -189,13 +170,18 @@ const routes = [
     redirect: '/power',
     meta: {
       icon: 'el-icon-s-tools',
-      title: '权限页面'
+      title: '权限页面',
+      path: '/power'
     },
     children: [
       {
         path: '/power',
         name: 'power',
-        component: () => import('@/views/power')
+        component: () => import('@/views/power'),
+        meta: {
+          title: '权限页面'
+        },
+        children: []
       }
     ]
   },
