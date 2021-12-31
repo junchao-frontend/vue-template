@@ -55,15 +55,19 @@ export default {
     },
     ToUpload (response, file) {
       console.log(file, 'success')
-      this.initData()
+      setTimeout(() => {
+        this.initData()
+        // console.log(1)
+        this.$message('上传成功')
+      }, 5000)
     },
     uploadError (err, file, fileList) {
       console.log(err, file, fileList, 'error')
     },
     beforeAvatarUpload (file) {
-      const isLt2M = file.size / 1024 / 1024 < 2
+      const isLt2M = file.size / 1024 / 1024 < 1
       if (!isLt2M) {
-        this.$message.error('上传头像图片大小不能超过 2MB!')
+        this.$message.error('上传头像图片大小不能超过 1MB!')
       }
       return isLt2M
     }

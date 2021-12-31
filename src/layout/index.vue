@@ -1,6 +1,6 @@
 <template>
   <el-container class="layout-container">
-    <el-aside class="aside" :width="isCollapse ? '64px' : '205px'">
+    <el-aside class="aside" :width="isCollapse ? '56px' : '200px'">
       <SideBar :is-collapse="isCollapse" />
     </el-aside>
     <el-container>
@@ -10,7 +10,7 @@
             'el-icon-s-fold' : !isCollapse ,
             'el-icon-s-unfold' : isCollapse
           }"
-          style="cursor: pointer;font-size:15px" @click="isCollapse = !isCollapse"> </i>
+          style="cursor: pointer;font-size:20px" @click="isCollapse = !isCollapse"> </i>
           <!-- <span style="marginLeft:22px">{{nowdata}}</span> -->
         </span>
         <div  class="breadcrumb">
@@ -58,6 +58,7 @@ export default {
   },
   watch: {
     screenWidth (newVal) {
+      console.log(newVal)
       if (newVal < 980) {
         this.isCollapse = true
       }
@@ -73,6 +74,7 @@ export default {
     window.onresize = () => {
       window.screenWidth = document.body.clientWidth
       that.screenWidth = window.screenWidth
+      console.log(that.screenWidth)
     }
   },
   destroyed () { },
@@ -145,10 +147,11 @@ export default {
   color: #333;
   line-height: 60px;
   display: flex;
-  align-items: center;
+  /* align-items: center; */
   justify-content: space-between;
 }
 .breadcrumb{
+  top: 33%;
   position: absolute;
   left: 47px;
   display: flex;

@@ -1,4 +1,4 @@
-/*
+/* 已废弃这个写法
   前端权限思路：
   1.前端自己写出权限映射,后端传来权限等级即可
 */
@@ -17,7 +17,6 @@ const role1 = [
   'power', 'powerF', // 权限管理
   'rolebutton', 'rolebuttonF',
   'drawingbedF', 'drawingbed',
-  'routerTest', 'first', 'second', 'threemenu', // 动态路由
   'mark', 'markF', 'editmark', 'showmark',
   '404'
 ]

@@ -1,7 +1,8 @@
 import Vue from 'vue'
+import store from './store'
 import App from './App.vue'
 import router from './router'
-import store from './store'
+import './router/permission.js' // 引入路由守卫
 import ElementUI from 'element-ui'
 import 'element-ui/lib/theme-chalk/index.css' // 全局引入element ui
 import axios from 'axios'
@@ -20,7 +21,7 @@ Vue.prototype.$echarts = echarts
 Vue.use(ElementUI)
 Vue.use(dataV)
 new Vue({
-  router,
   store,
+  router,
   render: h => h(App)
 }).$mount('#app')

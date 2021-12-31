@@ -3,7 +3,14 @@
     <router-view/>
   </div>
 </template>
-
+<script>
+import { initDynamicRoutes } from './router/index.js'
+export default {
+  created () {
+    initDynamicRoutes()
+  }
+}
+</script>
 <style lang="scss">
 #app {
   font-family: Avenir, Helvetica, Arial, sans-serif;

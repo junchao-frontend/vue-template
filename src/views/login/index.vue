@@ -67,7 +67,7 @@
 </template>
 
 <script>
-// import { allRole } from '../../router/rolesFront'
+import { initDynamicRoutes } from '../../router/index'
 import { login } from '@/api/login'
 export default {
   // mixins: [drawMixin],
@@ -100,26 +100,17 @@ export default {
     onSubmit (a) {
       login(a).then(res => {
         console.log(res)
-        const userInfo = res.data
-        const token = userInfo.token
-        const roles = userInfo.role
-        const name = userInfo.name
-        const photo = userInfo.photo
+        const { name, photo, token, rightList } = res.data
+        // console.log(rightList)
         sessionStorage.setItem('token', token)
-        sessionStorage.setItem('roles', roles)
-        // console.log(typeof roles)
+        this.$store.commit('SET_USERLIST', rightList)
         this.$store.commit('SET_NAME', name)
-        this.$store.commit('SET_ROLE', roles)
         this.$store.commit('SET_PHOTO', photo)
         this.$store.commit('SET_TOKEN', token)
+        initDynamicRoutes()
         this.$router.push('/home')
       })
-      // console.log('外部函数')
     }
-    // async onSubmit () {
-    //   const res = await login()
-    //   console.log(res)
-    // }
   }
 }
 </script>
@@ -130,7 +121,7 @@ export default {
   width: 900px;
   height: 1000px;
 }
->>>.el-input__inner {
+.el-input >>>.el-input__inner {
     margin-top: 6px;
     -webkit-appearance: none;
     background-color: #FFF;
@@ -155,24 +146,6 @@ export default {
   background-color: rgb(245, 246, 250);
   display: flex;
   align-items: center;
-}
- >>> .el-input__inner {
-    margin-top: 6px;
-    -webkit-appearance: none;
-    background-color: #FFF;
-    background-image: none;
-    border-radius: 4px;
-    border: 1px solid #DCDFE6;
-    box-sizing: border-box;
-    color: #606266;
-    display: inline-block;
-    font-size: inherit;
-    height: 32px;
-    line-height: 40px;
-    outline: 0;
-    padding: 0 15px;
-    transition: border-color .2s cubic-bezier(.645,.045,.355,1);
-    width: 100%;
 }
 .login-container::before{
         content: "";  /*:before和:after必带技能，重要性为满5颗星*/

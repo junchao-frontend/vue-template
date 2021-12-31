@@ -45,7 +45,7 @@ export default {
 <style scoped>
 .el-bread-one>>>.el-breadcrumb__inner a, .el-breadcrumb__inner.is-link{
     font-weight: 400;
-    font-size: 14px;
+    font-size: 16px;
     color: #8b9baf;
   }
   .el-bread-one>>>.el-breadcrumb__item:last-child
@@ -56,8 +56,8 @@ export default {
   .el-breadcrumb__inner a:hover,
   .el-breadcrumb__item:last-child
   .el-breadcrumb__inner:hover{
-    font-weight: 800;
-    font-size: 14px;
+    font-weight: 600;
+    font-size: 16px;
     color: #000;
   }
 </style>
