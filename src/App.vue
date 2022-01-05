@@ -4,10 +4,12 @@
   </div>
 </template>
 <script>
-import { initDynamicRoutes } from './router/index.js'
 export default {
   created () {
-    initDynamicRoutes()
+    /**
+     * 获取路由
+     */
+    this.$store.dispatch('setMenuList')
   }
 }
 </script>

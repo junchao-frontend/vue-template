@@ -2,7 +2,7 @@
   <div class="container">
   <el-breadcrumb separator="/">
     <!-- <el-breadcrumb-item :to="{ path: '/home' }">Dashboard</el-breadcrumb-item> -->
-    <el-breadcrumb-item class="el-bread-one" v-for="item in breadList" :key="item.path">
+    <el-breadcrumb-item class="el-bread-one" v-for="(item, index) in breadList" :key="index">
         <router-link :to="item.redirect||item.path">{{item.meta.title}}</router-link>
     </el-breadcrumb-item>
   </el-breadcrumb>
@@ -29,11 +29,10 @@ export default {
   },
   methods: {
     getList () {
-      var breadList = this.$route.matched.filter(item => item.meta.title)
-      // console.log(breadList)
+      var breadList = this.$route.matched.filter(item => !item.name)
       const first = breadList[0]
-      if (first && first.path !== '/homeF') {
-        breadList = [{ path: '/homeF', meta: { title: 'Dashboard' } }].concat(breadList)
+      if (first && first.path !== '/home') {
+        breadList = [{ path: '/home', meta: { title: 'Dashboard' } }].concat(breadList)
       }
       this.breadList = breadList
       // console.log(this.breadList)

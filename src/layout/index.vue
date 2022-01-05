@@ -25,7 +25,6 @@
           <i class="el-icon-arrow-down el-icon--right"></i>
           </div>
           <el-dropdown-menu slot="dropdown">
-            <el-dropdown-item @click.native="toPeople">个人中心</el-dropdown-item>
             <el-dropdown-item @click.native="quit">用户退出</el-dropdown-item>
           </el-dropdown-menu>
         </el-dropdown>
@@ -54,6 +53,7 @@ export default {
   },
   components: {
     SideBar: SideBar,
+    // eslint-disable-next-line vue/no-unused-components
     BreadCrumb: BreadCrumb
   },
   watch: {
@@ -80,9 +80,9 @@ export default {
   destroyed () { },
   methods: {
     quit () {
-      this.$router.push('/login')
       sessionStorage.clear() // 清空sessionstorage里面的所有数据
       window.location.reload() // 刷新vuex
+      this.$router.push('/')
     },
     toPeople () {
       this.$router.push('/people')

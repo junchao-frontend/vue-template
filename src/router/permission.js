@@ -18,10 +18,11 @@ router.beforeEach((to, from, next) => {
   // to 是 访问界面
   // from 是来自哪
   // next是放行方法
+  // document.title = to.matched[0].meta.title
   const logintoken = sessionStorage.getItem('token') // 从sessionstorage拿到token
-  if (logintoken && to.path === '/login') {
-    next('/home')
-  }
+  // if (logintoken && to.path === '/login') {
+  //   next('/home')
+  // }
   NProgress.start()
   // 若加载时间长且不定，担心进度条走完都没有加载完，可以调用
   NProgress.inc()// 这会以随机数量递增，且永远达不到100%，也可以设指定增量
@@ -37,6 +38,13 @@ router.beforeEach((to, from, next) => {
       NProgress.done()
     } else {
       next()
+      if (to.name === null) {
+        document.title = 'test'
+      } else if (to.meta.title) {
+        document.title = to.meta.title
+      } else if (!to.meta.title) {
+        document.title = to.matched[0].meta.title
+      }
       if (logintoken === 'admin') {
         var loginData = {
           account: 'wjc',

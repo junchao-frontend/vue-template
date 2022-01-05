@@ -36,10 +36,10 @@ export default {
       // console.log(this.$store.getters.getCurrentPage)
       return this.$store.getters.getCurrentPage
     },
-    ...mapState(['userList'])
+    ...mapState(['meunList'])
   },
   created () {
-    this.userRoutes = this.userList
+    this.routerInit() // 筛选出当前角色对应的侧边栏
     // this.roleinit() // 获取角色对应的路由
     // this.initRouter()
   },
@@ -49,6 +49,13 @@ export default {
   },
   destroyed () { },
   methods: {
+    routerInit () {
+      // console.log(this.meunList)
+      var userRouters = this.meunList.filter(route => {
+        return route.hidden === false
+      })
+      this.userRoutes = userRouters
+    }
     // initRouter () {
     //   const routerInit = this.$router.options.routes
     //   const userRoutes = routerInit.filter(item => {

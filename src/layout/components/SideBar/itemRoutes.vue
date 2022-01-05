@@ -35,6 +35,7 @@ export default {
   created () {},
   mounted () {
     this.userRoutes = this.routerData
+    // console.log(this.userRoutes)
   },
   methods: {}
 }

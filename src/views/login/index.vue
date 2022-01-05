@@ -67,7 +67,6 @@
 </template>
 
 <script>
-import { initDynamicRoutes } from '../../router/index'
 import { login } from '@/api/login'
 export default {
   // mixins: [drawMixin],
@@ -99,15 +98,12 @@ export default {
   methods: {
     onSubmit (a) {
       login(a).then(res => {
-        console.log(res)
-        const { name, photo, token, rightList } = res.data
-        // console.log(rightList)
+        const { name, photo, token } = res.data // 结构
         sessionStorage.setItem('token', token)
-        this.$store.commit('SET_USERLIST', rightList)
         this.$store.commit('SET_NAME', name)
         this.$store.commit('SET_PHOTO', photo)
         this.$store.commit('SET_TOKEN', token)
-        initDynamicRoutes()
+        this.$store.dispatch('setMenuList') // 解析路由
         this.$router.push('/home')
       })
     }
