@@ -55,11 +55,13 @@ export function getMenu () {
         account: 'wjc',
         password: '000919'
       }
-    } else {
+    } else if (token === 'test') {
       userData = {
         account: 'test',
         password: 'test'
       }
+    } else {
+      return
     }
     login(userData).then(res => {
       const datas = res.data.rightList

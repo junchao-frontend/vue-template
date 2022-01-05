@@ -34,7 +34,7 @@ export const constantRoutes = [
   }
 ]
 const createRouter = () => new VueRouter({
-  mode: 'history',
+  // mode: 'history',
   // 解决vue框架页面跳转有白色不可追踪色块的bug
   scrollBehavior (to, from, savedPosition) {
     return { x: 0, y: 0 }

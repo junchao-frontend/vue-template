@@ -10,8 +10,8 @@ export default new Vuex.Store({
     meunList: [],
     currentPage: '', // 用来存储当前路由
     token: sessionStorage.getItem('token'),
-    name: '',
-    photo: ''
+    name: sessionStorage.getItem('name'),
+    photo: sessionStorage.getItem('photo')
   },
   mutations: {
     SET_ROUTER_MENULIST (state, list) {

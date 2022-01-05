@@ -50,11 +50,11 @@ export default {
   destroyed () { },
   methods: {
     routerInit () {
-      // console.log(this.meunList)
       var userRouters = this.meunList.filter(route => {
         return route.hidden === false
       })
       this.userRoutes = userRouters
+      // console.log(userRouters)
     }
     // initRouter () {
     //   const routerInit = this.$router.options.routes

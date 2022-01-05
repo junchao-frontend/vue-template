@@ -1,5 +1,4 @@
 import router from './index.js'
-import { login } from '../api/login'
 import store from '../store'
 // import { allRole } from '@/router/rolesFront.js'// 导入角色对应的路由
 import NProgress from 'nprogress' // 引入进度条
@@ -45,24 +44,6 @@ router.beforeEach((to, from, next) => {
       } else if (!to.meta.title) {
         document.title = to.matched[0].meta.title
       }
-      if (logintoken === 'admin') {
-        var loginData = {
-          account: 'wjc',
-          password: '000919'
-        }
-      } else if (logintoken === 'test') {
-        loginData = {
-          account: 'test',
-          password: 'test'
-        }
-      }
-      login(loginData).then(res => {
-        // console.log(loginData, '---')
-        const userInfo = res.data
-        // 把角色的数据存入vuex
-        store.commit('SET_NAME', userInfo.name)
-        store.commit('SET_PHOTO', userInfo.photo)
-      })
       NProgress.done()
     }
     router.afterEach(() => {

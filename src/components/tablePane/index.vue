@@ -55,7 +55,7 @@
     </el-pagination>
     </div>
     <!-- 添加数据对话框 -->
-  <el-dialog class="dialog" title="Create" :visible.sync="addFormVisible" :modal="false">
+  <el-dialog class="dialog" title="Create" :visible.sync="addFormVisible" :modal-append-to-body="false">
   <el-form :model="form">
     <el-form-item label="姓名" :label-width="formLabelWidth">
       <el-input v-model="form.name" autocomplete="off"></el-input>
@@ -79,7 +79,7 @@
   </div>
   </el-dialog>
     <!-- 更新数据对话框 -->
-  <el-dialog class="dialog" title="Update" :visible.sync="updateFormVisible" :modal="false">
+  <el-dialog class="dialog" title="Update" :visible.sync="updateFormVisible" :modal-append-to-body="false">
   <el-form :model="updateForm">
     <el-form-item label="姓名" :label-width="formLabelWidth">
       <el-input v-model="updateForm.name" autocomplete="off"></el-input>

@@ -100,29 +100,6 @@ export default {
             ]
           },
           {
-            path: '/rolebutton',
-            name: 'rolebutton',
-            component: 'Layout',
-            redirect: '/rolebutton',
-            meta: {
-              icon: 'el-icon-mouse',
-              title: '指令按钮',
-              path: '/rolebutton'
-            },
-            children: [
-              {
-                path: '/rolebutton',
-                name: '',
-                component: 'rolebutton',
-                meta: {
-                  icon: 'el-icon-mouse',
-                  title: '指令按钮',
-                  path: '/rolebutton'
-                }
-              }
-            ]
-          },
-          {
             path: '/drawingbed',
             name: 'drawingbed',
             component: 'Layout',
@@ -152,7 +129,7 @@ export default {
             redirect: '/power',
             meta: {
               icon: 'el-icon-s-tools',
-              title: '权限页面',
+              title: '权限测试',
               path: '/power'
             },
             children: [
@@ -161,16 +138,56 @@ export default {
                 name: '',
                 component: 'power',
                 meta: {
-                  icon: 'el-icon-s-tools',
-                  title: '权限页面',
+                  title: '页面权限',
                   path: '/power'
+                }
+              },
+              {
+                path: '/rolebutton',
+                name: '',
+                component: 'rolebutton',
+                meta: {
+                  title: '指令按钮',
+                  path: '/rolebutton'
+                }
+              },
+              {
+                path: '/role',
+                name: '',
+                component: 'role',
+                meta: {
+                  title: '角色按钮',
+                  path: '/role'
+                }
+              }
+            ]
+          },
+          {
+            path: '/people',
+            name: 'people',
+            component: 'Layout',
+            redirect: '/people',
+            meta: {
+              icon: 'el-icon-user-solid',
+              title: '个人中心',
+              path: '/people'
+            },
+            children: [
+              {
+                path: '/people',
+                name: '',
+                component: 'people',
+                meta: {
+                  icon: 'el-icon-user-solid',
+                  title: '个人中心',
+                  path: '/people'
                 }
               }
             ]
           }
         ]
       }
-    } else {
+    } else if ((user.account === 'test' && user.password === 'test')) {
       return {
         name: '测试员',
         role: 0,
@@ -265,29 +282,6 @@ export default {
             ]
           },
           {
-            path: '/rolebutton',
-            name: 'rolebutton',
-            component: 'Layout',
-            redirect: '/rolebutton',
-            meta: {
-              icon: 'el-icon-mouse',
-              title: '指令按钮',
-              path: '/rolebutton'
-            },
-            children: [
-              {
-                path: '/rolebutton',
-                name: '',
-                component: 'rolebutton',
-                meta: {
-                  icon: 'el-icon-mouse',
-                  title: '指令按钮',
-                  path: '/rolebutton'
-                }
-              }
-            ]
-          },
-          {
             path: '/drawingbed',
             name: 'drawingbed',
             component: 'Layout',
@@ -306,6 +300,60 @@ export default {
                   icon: 'el-icon-picture',
                   title: '图床组件',
                   path: '/drawingbed'
+                }
+              }
+            ]
+          },
+          {
+            path: '/power',
+            name: 'power',
+            component: 'Layout',
+            redirect: '/power',
+            meta: {
+              icon: 'el-icon-s-tools',
+              title: '权限测试',
+              path: '/power'
+            },
+            children: [
+              {
+                path: '/rolebutton',
+                name: '',
+                component: 'rolebutton',
+                meta: {
+                  title: '指令按钮',
+                  path: '/rolebutton'
+                }
+              },
+              {
+                path: '/role',
+                name: '',
+                component: 'role',
+                meta: {
+                  title: '角色按钮',
+                  path: '/role'
+                }
+              }
+            ]
+          },
+          {
+            path: '/people',
+            name: 'people',
+            component: 'Layout',
+            redirect: '/people',
+            meta: {
+              icon: 'el-icon-user-solid',
+              title: '个人中心',
+              path: '/people'
+            },
+            children: [
+              {
+                path: '/people',
+                name: '',
+                component: 'people',
+                meta: {
+                  icon: 'el-icon-user-solid',
+                  title: '个人中心',
+                  path: '/people'
                 }
               }
             ]
